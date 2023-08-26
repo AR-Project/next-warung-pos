@@ -1,3 +1,4 @@
 {
+  "plugins": ["vitest"],
   "extends": "next/core-web-vitals"
 }
