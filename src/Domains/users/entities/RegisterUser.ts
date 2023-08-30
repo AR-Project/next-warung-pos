@@ -13,7 +13,8 @@ export default class RegisterUser implements IRegisterUserEntities {
   username: string;
   password: string;
   fullname: string;
-  role?: string;
+  role: string;
+
   constructor(payload: IRegisterUser) {
     this._verifyPayload(payload);
 
