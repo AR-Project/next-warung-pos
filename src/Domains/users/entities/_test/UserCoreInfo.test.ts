@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import UserCoreInfo from "../UserCoreInfo.js";
+import UserCoreInfo from "../UserCoreInfo";
 
 describe("UserCoreInfo entities", () => {
   it("should throw error when Payload does not contain needed property", () => {

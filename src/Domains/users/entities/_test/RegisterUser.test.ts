@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import RegisterUser, { IRegisterUser } from "../RegisterUser.js";
+import RegisterUser, { IRegisterUser } from "../RegisterUser";
 
 describe("a RegisterUser entities", () => {
   it("should throw error when payload did not contain needed property", () => {

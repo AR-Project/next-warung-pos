@@ -1,6 +1,6 @@
-import { IRegisterUser } from "./entities/RegisterUser.js";
-import { IRegisteredUser } from "./entities/RegisteredUser.js";
-import { IUserCoreInfo } from "./entities/UserCoreInfo.js";
+import { IRegisterUser } from "./entities/RegisterUser";
+import { IRegisteredUser } from "./entities/RegisteredUser";
+import { IUserCoreInfo } from "./entities/UserCoreInfo";
 
 export default interface IUserRepository {
   verifyAvailableUsername: (username: string) => Promise<void>;
