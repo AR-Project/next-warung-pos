@@ -10,15 +10,17 @@
     "test": "vitest",
     "db:generate": "drizzle-kit generate:pg",
     "db:drop": "drizzle-kit drop",
-    "db:push": "drizzle-kit push:pg",
     "db:migrate": "ts-node --skip-project ./src/infrastructure/database/migrations.ts",
-    "studio": "drizzle-kit studio"
+    "db:migrate:test": "cross-env NODE_ENV=test ts-node --skip-project ./src/infrastructure/database/migrations.ts",
+    "studio": "drizzle-kit studio --port 5000",
+    "studio:test": "drizzle-kit studio --port 5001 --config=./test/drizzle.config.ts"
   },
   "dependencies": {
     "@types/node": "20.5.3",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
     "drizzle-orm": "^0.28.5",
     "eslint": "8.47.0",
@@ -35,7 +37,9 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
+    "@types/bcrypt": "^5.0.0",
     "@vitejs/plugin-react": "^4.0.4",
+    "cross-env": "^7.0.3",
     "drizzle-kit": "^0.19.13",
     "eslint-plugin-vitest": "^0.2.8",
     "jsdom": "^22.1.0",
