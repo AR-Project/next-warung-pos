@@ -39,6 +39,7 @@ describe("a RegisterUser entities", () => {
       username: "dicodingindonesiadicodingindonesiadicodingindonesiadicoding",
       fullname: "Dicoding Indonesia",
       password: "abc",
+      email: "test@test.com",
       role: "base",
     };
 
@@ -54,6 +55,7 @@ describe("a RegisterUser entities", () => {
       username: "dico ding",
       fullname: "dicoding",
       password: "abc",
+      email: "test@test.com",
       role: "base",
     };
 
@@ -68,6 +70,8 @@ describe("a RegisterUser entities", () => {
       username: "dicoding",
       fullname: "Dicoding Indonesia",
       password: "abc",
+      email: "test@test.com",
+
       role: "base",
     };
 
