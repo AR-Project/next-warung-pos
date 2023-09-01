@@ -9,7 +9,7 @@ export default defineConfig({
     environment: "jsdom",
     include: ["**/*.test.{js,ts,jsx,tsx,mdx}"],
     globals: true,
-    setupFiles: ["dotenv/config"],
+    setupFiles: ["dotenv/config", "reflect-metadata"],
   },
   resolve: {
     alias: {

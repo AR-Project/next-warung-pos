@@ -1,0 +1,52 @@
+import { injectable, inject } from "tsyringe";
+import RegisterUser from "@/Domains/users/entities/RegisterUser";
+import RegisteredUser, {
+  type IRegisteredUser,
+} from "@/Domains/users/entities/RegisteredUser";
+import type IUserRepository from "@/Domains/users/UserRepository";
+import type IPasswordHash from "@/Application/security/PasswordHash";
+import type IRoleCheck from "@/Application/security/RoleCheck";
+
+export interface IAddUserPayload {
+  username: string;
+  password: string;
+  fullname: string;
+  email: string;
+  key?: string;
+}
+
+@injectable()
+export default class CheckUsernameUseCase {
+  _userRepository: IUserRepository;
+  // _passwordHash: IPasswordHash;
+  // _roleCheck: IRoleCheck;
+
+  constructor(
+    @inject("IUserRepository") userRepository: IUserRepository
+    // @inject("IPasswordHash") passwordHash: IPasswordHash,
+    // @inject("IRoleCheck") roleCheck: IRoleCheck
+  ) {
+    this._userRepository = userRepository;
+    // this._passwordHash = passwordHash;
+    // this._roleCheck = roleCheck;
+  }
+
+  async execute(useCasePayload: IAddUserPayload): Promise<boolean> {
+    const { username, password, fullname, email, key } = useCasePayload;
+    // let role: string = this._roleCheck.verifyKey(key);
+    const registerUser: RegisterUser = new RegisterUser({
+      username,
+      password,
+      fullname,
+      email,
+      role: "test",
+    });
+
+    await this._userRepository.verifyAvailableUsername(registerUser.username);
+    // registerUser.password = await this._passwordHash.hash(
+    //   registerUser.password
+    // );
+
+    return true;
+  }
+}

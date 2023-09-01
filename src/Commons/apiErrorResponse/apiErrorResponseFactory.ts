@@ -4,7 +4,7 @@ import DomainErrorTranslator, {
 } from "../exceptions/DomainErrorTranslator";
 import ClientError from "../exceptions/ClientError";
 
-export default function apiErrorResponse(err: Error) {
+export default function apiErrorResponse(err: Error, payload?: any) {
   const translatedError: ITranslatedError =
     DomainErrorTranslator.translate(err);
 
@@ -13,6 +13,7 @@ export default function apiErrorResponse(err: Error) {
     const jsonErrorResponse = {
       status: "fail",
       message: translatedError.message,
+      payload,
     };
 
     return NextResponse.json(jsonErrorResponse, {

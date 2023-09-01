@@ -1,25 +1,23 @@
-import { PostgresJsDatabase } from "drizzle-orm/postgres-js";
+import { injectable, inject } from "tsyringe";
+
+import { type PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { eq } from "drizzle-orm";
 
-import type postgres from "postgres";
-
-import IIdGenerator from "@/Application/tools/IdGenerator";
+import type IIdGenerator from "@/Application/tools/IdGenerator";
 import IUserRepository from "@/Domains/users/UserRepository";
-import { IRegisterUser } from "@/Domains/users/entities/RegisterUser";
-import { IRegisteredUser } from "@/Domains/users/entities/RegisteredUser";
-import { IUserCoreInfo } from "@/Domains/users/entities/UserCoreInfo";
 import InvariantError from "@/Commons/exceptions/InvariantError";
 
 import { user } from "../database/schema/user";
 
+@injectable()
 // @ts-expect-error WIP
 export default class UserRepository implements IUserRepository {
   _db: PostgresJsDatabase<Record<string, never>>;
   _idGenerator: IIdGenerator;
 
   constructor(
-    db: PostgresJsDatabase<Record<string, never>>,
-    idGenerator: IIdGenerator
+    @inject("db") db: PostgresJsDatabase<Record<string, never>>,
+    @inject("idGenerator") idGenerator: IIdGenerator
   ) {
     this._db = db;
     this._idGenerator = idGenerator;

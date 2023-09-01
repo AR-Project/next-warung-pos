@@ -2,6 +2,7 @@ export interface IRegisterUser {
   username: string;
   password: string;
   fullname: string;
+  email: string;
   role?: string;
 }
 
@@ -13,20 +14,29 @@ export default class RegisterUser implements IRegisterUserEntities {
   username: string;
   password: string;
   fullname: string;
+  email: string;
   role: string;
 
   constructor(payload: IRegisterUser) {
     this._verifyPayload(payload);
 
-    const { username, password, fullname, role }: IRegisterUser = payload;
+    const { username, password, fullname, email, role }: IRegisterUser =
+      payload;
 
     this.username = username;
     this.password = password;
     this.fullname = fullname;
+    this.email = email;
     this.role = role ? role : "user";
   }
 
-  _verifyPayload({ username, password, fullname, role }: IRegisterUser): void {
+  _verifyPayload({
+    username,
+    password,
+    fullname,
+    email,
+    role,
+  }: IRegisterUser): void {
     if (username == null || password == null || fullname == null) {
       throw new Error("REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY");
     }
@@ -34,6 +44,7 @@ export default class RegisterUser implements IRegisterUserEntities {
     if (
       typeof username !== "string" ||
       typeof password !== "string" ||
+      typeof email !== "string" ||
       typeof fullname !== "string"
     ) {
       throw new Error("REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION");
