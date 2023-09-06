@@ -1,43 +1,37 @@
-export interface IRegisterUser {
+export type IRegisterUser = {
   username: string;
   password: string;
-  fullname: string;
+  fullName: string;
   email: string;
-  role?: string;
-}
+  role: string;
+};
 
-interface IRegisterUserEntities extends IRegisterUser {
+type IRegisterUserEntities = IRegisterUser & {
   _verifyPayload(payload: IRegisterUser): void;
-}
+};
 
 export default class RegisterUser implements IRegisterUserEntities {
   username: string;
   password: string;
-  fullname: string;
+  fullName: string;
   email: string;
   role: string;
 
   constructor(payload: IRegisterUser) {
     this._verifyPayload(payload);
 
-    const { username, password, fullname, email, role }: IRegisterUser =
+    const { username, password, fullName, email, role }: IRegisterUser =
       payload;
 
     this.username = username;
     this.password = password;
-    this.fullname = fullname;
+    this.fullName = fullName;
     this.email = email;
     this.role = role ? role : "user";
   }
 
-  _verifyPayload({
-    username,
-    password,
-    fullname,
-    email,
-    role,
-  }: IRegisterUser): void {
-    if (username == null || password == null || fullname == null) {
+  _verifyPayload({ username, password, fullName, email }: IRegisterUser): void {
+    if (username == null || password == null || fullName == null) {
       throw new Error("REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY");
     }
 
@@ -45,7 +39,7 @@ export default class RegisterUser implements IRegisterUserEntities {
       typeof username !== "string" ||
       typeof password !== "string" ||
       typeof email !== "string" ||
-      typeof fullname !== "string"
+      typeof fullName !== "string"
     ) {
       throw new Error("REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION");
     }

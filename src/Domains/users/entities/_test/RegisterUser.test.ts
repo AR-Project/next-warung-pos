@@ -37,7 +37,7 @@ describe("a RegisterUser entities", () => {
     // Arrange
     const payload: IRegisterUser = {
       username: "dicodingindonesiadicodingindonesiadicodingindonesiadicoding",
-      fullname: "Dicoding Indonesia",
+      fullName: "Dicoding Indonesia",
       password: "abc",
       email: "test@test.com",
       role: "base",
@@ -53,7 +53,7 @@ describe("a RegisterUser entities", () => {
     // Arrange
     const payload: IRegisterUser = {
       username: "dico ding",
-      fullname: "dicoding",
+      fullName: "dicoding",
       password: "abc",
       email: "test@test.com",
       role: "base",
@@ -68,7 +68,7 @@ describe("a RegisterUser entities", () => {
     // Arrange
     const payload: IRegisterUser = {
       username: "dicoding",
-      fullname: "Dicoding Indonesia",
+      fullName: "Dicoding Indonesia",
       password: "abc",
       email: "test@test.com",
 
@@ -76,11 +76,11 @@ describe("a RegisterUser entities", () => {
     };
 
     // Action
-    const { username, fullname, password, role } = new RegisterUser(payload);
+    const { username, fullName, password, role } = new RegisterUser(payload);
 
     // Assert
     expect(username).toEqual(payload.username);
-    expect(fullname).toEqual(payload.fullname);
+    expect(fullName).toEqual(payload.fullName);
     expect(password).toEqual(payload.password);
     expect(role).toEqual(payload.role);
   });

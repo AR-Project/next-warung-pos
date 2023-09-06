@@ -10,6 +10,7 @@
     "test": "vitest",
     "db:generate": "drizzle-kit generate:pg",
     "db:drop": "drizzle-kit drop",
+    "db:push:test": " drizzle-kit push:pg --config=test/drizzle.config.ts",
     "db:migrate": "ts-node --skip-project ./src/infrastructure/database/migrations.ts",
     "db:migrate:test": "cross-env NODE_ENV=test ts-node --skip-project ./src/infrastructure/database/migrations.ts",
     "studio": "drizzle-kit studio --port 5000",

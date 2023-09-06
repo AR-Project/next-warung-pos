@@ -7,7 +7,7 @@ describe("a RegisteredUser entities", () => {
     // Arrange
     const payload = {
       username: "arproject",
-      fullname: "AR Project",
+      fullName: "AR Project",
       role: "base",
     };
 
@@ -23,7 +23,7 @@ describe("a RegisteredUser entities", () => {
     const payload = {
       id: 123,
       username: "dicoding",
-      fullname: {},
+      fullName: {},
       role: "base",
     };
 
@@ -39,7 +39,7 @@ describe("a RegisteredUser entities", () => {
     const payload = {
       id: "user-123",
       username: "dicoding",
-      fullname: "Dicoding Indonesia",
+      fullName: "Dicoding Indonesia",
       role: "superAdmin",
     };
 
@@ -49,7 +49,7 @@ describe("a RegisteredUser entities", () => {
     // Assert
     expect(registeredUser.id).toEqual("user-123");
     expect(registeredUser.username).toEqual(payload.username);
-    expect(registeredUser.fullname).toEqual(payload.fullname);
+    expect(registeredUser.fullName).toEqual(payload.fullName);
     expect(registeredUser.role).toEqual(payload.role);
   });
 });

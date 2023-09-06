@@ -7,4 +7,5 @@ import pgDb from "./postgres";
 console.log("start migrating");
 (async () => {
   await migrate(drizzle(pgDb), { migrationsFolder: "./drizzle" });
+  process.exit(0);
 })();
