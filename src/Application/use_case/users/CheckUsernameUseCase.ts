@@ -3,14 +3,14 @@ import RegisterUser from "@/Domains/users/entities/RegisterUser";
 import RegisteredUser, {
   type IRegisteredUser,
 } from "@/Domains/users/entities/RegisteredUser";
-import type IUserRepository from "@/Domains/users/UserRepository";
+import type IUserRepository from "@/Domains/users/IUserRepository";
 import type IPasswordHash from "@/Application/security/PasswordHash";
 import type IRoleCheck from "@/Application/security/RoleCheck";
 
 export interface IAddUserPayload {
   username: string;
   password: string;
-  fullname: string;
+  fullName: string;
   email: string;
   key?: string;
 }
@@ -32,12 +32,12 @@ export default class CheckUsernameUseCase {
   }
 
   async execute(useCasePayload: IAddUserPayload): Promise<boolean> {
-    const { username, password, fullname, email, key } = useCasePayload;
+    const { username, password, fullName, email, key } = useCasePayload;
     // let role: string = this._roleCheck.verifyKey(key);
     const registerUser: RegisterUser = new RegisterUser({
       username,
       password,
-      fullname,
+      fullName,
       email,
       role: "test",
     });
