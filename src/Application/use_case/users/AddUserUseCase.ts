@@ -1,8 +1,6 @@
 import { injectable, inject } from "tsyringe";
-import RegisterUser from "@/Domains/users/entities/RegisterUser.js";
-import RegisteredUser, {
-  type IRegisteredUser,
-} from "@/Domains/users/entities/RegisteredUser";
+import RegisterUser from "@/Domains/users/entities/RegisterUser";
+import { type IRegisteredUser } from "@/Domains/users/entities/RegisteredUser";
 import type IUserRepository from "@/Domains/users/IUserRepository";
 import type IPasswordHash from "@/Application/security/PasswordHash";
 import type IRoleCheck from "@/Application/security/RoleCheck";
