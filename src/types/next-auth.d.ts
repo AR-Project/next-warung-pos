@@ -4,22 +4,15 @@ import type { JWT } from "next-auth/jwt";
 type UserId = string;
 
 declare module "next-auth/jwt" {
-  interface JWT {
-    id: string;
-    role: string;
-  }
+  interface JWT extends UserInfo {}
 }
 
 declare module "next-auth" {
-  interface User {
-    role: string;
-  }
+  interface User extends UserInfo {}
 
   interface Session {
-    user: User & {
-      id: string;
+    user: UserInfo & {
       name: string;
-      role: string;
     };
   }
 }

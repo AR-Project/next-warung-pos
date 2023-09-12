@@ -1,51 +1,65 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { type AuthOptions } from "next-auth";
+import { DependencyContainer } from "tsyringe";
+import VerifyUserCredentials from "@/Application/use_case/auth/VerifyUserCredentials";
 
-export const authOptions: AuthOptions = {
-  providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        username: { label: "username", type: "text", placeholder: "Username" },
-        password: { label: "password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        const user = [
-          { id: "user-1", name: "admin", password: "pass", role: "ADMIN" },
-          { id: "user-2", name: "user", password: "pass", role: "USER" },
-        ];
+export const authOptionsFactory = (
+  container: DependencyContainer
+): AuthOptions => {
+  return {
+    providers: [
+      CredentialsProvider({
+        name: "Credentials",
+        credentials: {
+          username: {
+            label: "username",
+            type: "text",
+            placeholder: "Username",
+          },
+          password: { label: "password", type: "password" },
+        },
+        async authorize(credentials, req) {
+          const verifyUserCredentials = container.resolve(
+            VerifyUserCredentials
+          );
 
-        const userIndex = user.findIndex(
-          (e) => e.name === credentials?.username
-        );
-
-        if (userIndex === -1) return null;
-        if (user[userIndex].password === credentials?.password) {
-          return user[userIndex];
+          try {
+            const userInfo = await verifyUserCredentials.execute({
+              username: credentials?.username,
+              password: credentials?.password,
+            });
+            return userInfo;
+          } catch (error) {
+            return null;
+          }
+        },
+      }),
+    ],
+    secret: process.env.SECRET,
+    session: {
+      strategy: "jwt",
+      maxAge: 60 * 60 * 24 * 30,
+    },
+    callbacks: {
+      async jwt({ token, user }) {
+        if (user) {
+          token.role = user.role;
+          token.id = user.id;
+          token.username = user.username;
+          token.name = user.fullName;
         }
-        return null;
+        return token;
       },
-    }),
-  ],
-  secret: process.env.SECRET,
-  session: {
-    strategy: "jwt",
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.role = user.role;
-        token.id = user.id;
-      }
-      return token;
+      async session({ token, session }) {
+        if (token !== undefined && session !== null) {
+          session.user.role = token.role;
+          session.user.id = token.id;
+          session.user.username = token.username;
+          session.user.name = token.name as string;
+        }
+        return session;
+      },
     },
-    async session({ token, session }) {
-      if (token !== undefined && session !== null) {
-        session.user.role = token.role;
-        session.user.id = token.id;
-      }
-      return session;
-    },
-  },
-  debug: process.env.NODE_ENV === "development",
+    debug: process.env.NODE_ENV === "development",
+  };
 };

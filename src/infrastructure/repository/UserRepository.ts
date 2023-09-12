@@ -12,7 +12,6 @@ import { IRegisterUser } from "@/Domains/users/entities/RegisterUser";
 import RegisteredUser from "@/Domains/users/entities/RegisteredUser";
 
 @injectable()
-// @ts-expect-error WIP on class method
 export default class UserRepository implements IUserRepository {
   _db: PostgresJsDatabase<Record<string, never>>;
   _idGenerator: IIdGenerator;
@@ -61,6 +60,27 @@ export default class UserRepository implements IUserRepository {
     const { savedPassword } = userInfo[0];
     return savedPassword;
   }
+
+  async getUserInfoByUsername(username: string) {
+    const userInfo = await this._db
+      .select({
+        id: user.id,
+        password: user.password,
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role,
+        username: user.username,
+      })
+      .from(user)
+      .where(eq(user.username, username));
+
+    if (userInfo.length === 0) {
+      throw new InvariantError("username not found");
+    }
+
+    return userInfo[0];
+  }
+
   async updatePassword(id: string, newPassword: string) {
     await this._db
       .update(user)
