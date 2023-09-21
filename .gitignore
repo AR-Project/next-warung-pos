@@ -40,3 +40,6 @@ next-env.d.ts
 
 #ignore drizzle
 /drizzle
+
+# excalidraw file
+*.excalidraw

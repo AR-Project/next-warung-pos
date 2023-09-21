@@ -5,6 +5,10 @@ declare global {
     _verifyPayload: (T) => void;
   };
 
+  /**
+   * USER TYPE
+   */
+
   type UserInfo = {
     id: string;
     username: string;
@@ -15,5 +19,19 @@ declare global {
 
   type UserInfoWithPassword = UserInfo & {
     password: string;
+  };
+
+  /**
+   * LOGS REPOSITORY TYPE
+   */
+
+  type ActivityLog = {
+    userId: string;
+    storeId: string | null;
+    targetId: string;
+    message: string;
+  };
+  type ActivityLogRepository = ActivityLog & {
+    id: string;
   };
 }
