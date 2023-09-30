@@ -1,7 +1,7 @@
 import { injectable, inject } from "tsyringe";
 
 import { type PostgresJsDatabase } from "drizzle-orm/postgres-js";
-import { eq } from "drizzle-orm";
+import { eq, or } from "drizzle-orm";
 
 import type IIdGenerator from "@/Application/tools/IdGenerator";
 import IUserRepository from "@/Domains/users/IUserRepository";
@@ -23,6 +23,16 @@ export default class UserRepository implements IUserRepository {
     this._db = db;
     this._idGenerator = idGenerator;
   }
+  verifyUserExist = async (username: string, email: string) => {
+    const selectedUser = await this._db
+      .select()
+      .from(user)
+      .where(or(eq(user.username, username), eq(user.email, email)));
+
+    if (selectedUser.length !== 0) {
+      throw new InvariantError("username / email sudah terpakai");
+    }
+  };
   async verifyAvailableUsername(username: string) {
     const selectedUser = await this._db
       .select()

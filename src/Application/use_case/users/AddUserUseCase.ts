@@ -40,7 +40,11 @@ export default class AddUserUseCase {
       role,
     });
 
-    await this._userRepository.verifyAvailableUsername(registerUser.username);
+    await this._userRepository.verifyUserExist(
+      registerUser.username,
+      registerUser.email
+    );
+
     registerUser.password = await this._passwordHash.hash(
       registerUser.password
     );

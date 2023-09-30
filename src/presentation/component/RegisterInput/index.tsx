@@ -30,7 +30,6 @@ export default function RegisterInput({ register }: Props) {
 
   async function onSubmitHandler(event: { preventDefault: () => void }) {
     event.preventDefault();
-    console.log(registerPayload);
     if (register !== undefined) {
       await register(registerPayload);
     }
@@ -50,6 +49,7 @@ export default function RegisterInput({ register }: Props) {
         name="username"
         value={registerPayload.username}
         className="text-black text-xl h-16 rounded-md"
+        required
       />
       <input
         type="text"
@@ -59,6 +59,7 @@ export default function RegisterInput({ register }: Props) {
         name="fullName"
         value={registerPayload.fullName}
         className="text-black text-xl h-16 rounded-md"
+        required
       />
       <input
         type="email"
@@ -68,6 +69,7 @@ export default function RegisterInput({ register }: Props) {
         name="email"
         value={registerPayload.email}
         className="text-black text-xl h-16 rounded-md"
+        required
       />
 
       <input
@@ -79,6 +81,7 @@ export default function RegisterInput({ register }: Props) {
         value={registerPayload.password}
         onChange={handleChange}
         className="text-black text-xl h-16 rounded-md"
+        required
       />
 
       <button
