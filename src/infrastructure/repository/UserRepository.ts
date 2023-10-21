@@ -23,6 +23,20 @@ export default class UserRepository implements IUserRepository {
     this._db = db;
     this._idGenerator = idGenerator;
   }
+  getPasswordById = async (id: string) => {
+    const selectedUser = await this._db
+      .select({ password: user.password })
+      .from(user)
+      .where(eq(user.id, id));
+
+    if (selectedUser.length !== 1) {
+      throw new InvariantError("No such user");
+    }
+
+    const { password } = selectedUser[0];
+
+    return password;
+  };
   verifyUserExist = async (username: string, email: string) => {
     const selectedUser = await this._db
       .select()
@@ -97,5 +111,4 @@ export default class UserRepository implements IUserRepository {
       .set({ password: newPassword })
       .where(eq(user.id, id));
   }
-  // getCoreInfoByUsername: (username: string) => Promise<IUserCoreInfo>;
 }
