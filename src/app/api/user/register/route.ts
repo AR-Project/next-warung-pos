@@ -1,7 +1,7 @@
 import "reflect-metadata";
+import { NextResponse } from "next/server";
 
 import apiErrorResponse from "@/Commons/apiErrorResponse/apiErrorResponseFactory";
-import { NextResponse } from "next/server";
 import container from "@/infrastructure/container";
 import AddUserUseCase from "@/Application/use_case/users/AddUserUseCase";
 
@@ -25,6 +25,9 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error: Error | any) {
+    if (process.env.NODE_ENV === "development") {
+      console.log(error);
+    }
     return apiErrorResponse(error);
   }
 }

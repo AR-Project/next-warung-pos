@@ -8,4 +8,10 @@ declare global {
     email: string;
     key?: string;
   };
+
+  type ChangeUserPasswordPayload = {
+    userId: string;
+    password: string;
+    newPassword: string;
+  };
 }

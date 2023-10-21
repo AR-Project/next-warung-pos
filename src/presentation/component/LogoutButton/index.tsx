@@ -7,7 +7,7 @@ export default function LogoutButton() {
   };
   return (
     <button
-      className="rounded-full bg-indigo-950 p-4 hover:bg-indigo-500"
+      className="border rounded-xl text-xs bg-blue-950 px-2 h-full"
       onClick={async () => await signOut()}
     >
       Logout

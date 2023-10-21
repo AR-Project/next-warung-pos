@@ -1,9 +1,11 @@
 "use client";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import RegisterInput from "@/presentation/component/RegisterInput";
 import { useRouter } from "next/navigation";
 
-export default function page() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export default function Register() {
   const { push } = useRouter();
 
   const onRegisterHandler = async (payload: RegisterUserPayload) => {
@@ -22,12 +24,14 @@ export default function page() {
       console.log("register User is success");
       push("/login");
     }
+    toast.error(resultJson.message);
   };
 
   return (
     <main className="flex flex-col gap-5 h-screen ">
       <h1 className="text-center text-3xl font-bold p-5 pb-3">Register User</h1>
       <RegisterInput register={onRegisterHandler} />
+      <ToastContainer position="bottom-left" theme="dark" autoClose={7000} />
     </main>
   );
 }
