@@ -1,7 +1,6 @@
 "use client";
 import { SyncLoader } from "react-spinners";
 import { HiMenu } from "react-icons/hi";
-import getAppSession from "@/presentation/utils/getAppSession";
 
 import LogoutButton from "../LogoutButton";
 import { Menu, Transition } from "@headlessui/react";
