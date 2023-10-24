@@ -28,7 +28,7 @@ export default function Register() {
   };
 
   return (
-    <main className="flex flex-col gap-5 h-screen ">
+    <main className="flex flex-col gap-5 h-full ">
       <h1 className="text-center text-3xl font-bold p-5 pb-3">Register User</h1>
       <RegisterInput register={onRegisterHandler} />
       <ToastContainer position="bottom-left" theme="dark" autoClose={7000} />

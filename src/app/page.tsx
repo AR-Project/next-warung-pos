@@ -9,10 +9,10 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen w-screen bg-zinc-700 gap-4">
-      <p className="text-lg border w-full p-5 break-words">
-        {JSON.stringify(session)}
-      </p>
+    <main className="flex flex-col items-center justify-center h-full bg-zinc-700 gap-4">
+      <pre className="text-sm border p-1 break-words">
+        {JSON.stringify(session.user, null, 4)}
+      </pre>
     </main>
   );
 }
