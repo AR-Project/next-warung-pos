@@ -7,8 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import TopNav from "@/presentation/component/TopNav";
 import Provider from "@/presentation/context/UserProvider";
-import getAppSession from "@/presentation/utils/getAppSession";
-import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,11 +23,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <Provider>
-        <body className={`${inter.className}`}>
+        <body className={`${inter.className} flex flex-col h-screen w-screen`}>
           <TopNav />
           {children}
         </body>
-        {/* <ToastContainer position="bottom-left" theme="dark" autoClose={7000} /> */}
       </Provider>
     </html>
   );

@@ -26,10 +26,11 @@ export default function Page() {
   }, [error]);
 
   return (
-    <section className="flex flex-col w-screen h-screen gap-10 ">
+    <section className="flex flex-col w-screen h-full gap-10 ">
       <h1 className="text-center text-3xl font-bold p-5">Login Page</h1>
       <button onClick={() => toast.success("test")}>toast</button>
       <LoginInput onLoginHandler={onLoginHandler} />
+      <a href="/register">register</a>
       <ToastContainer position="bottom-left" theme="dark" autoClose={7000} />
     </section>
   );
