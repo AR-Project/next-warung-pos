@@ -1,3 +1,4 @@
+import "dotenv/config";
 import type { Config } from "drizzle-kit";
 
 export default {
@@ -5,10 +6,10 @@ export default {
   out: "./drizzle",
   driver: "pg",
   dbCredentials: {
-    host: "127.0.0.2",
-    port: 5432,
-    database: "nextpos",
-    user: "developer",
-    password: "dev",
+    host: process.env.PGHOST as string,
+    port: process.env.PGPORT as unknown as number,
+    database: process.env.PGDATABASE as string,
+    user: process.env.USER as string,
+    password: process.env.PGPASSWORD as string,
   },
 } satisfies Config;
