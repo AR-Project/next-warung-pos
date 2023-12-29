@@ -29,7 +29,7 @@ describe("a RegisterUser entities", () => {
     // Action and Assert
     // @ts-expect-error testing error
     expect(() => new RegisterUser(payload)).toThrowError(
-      "REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION"
+      "REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
 
