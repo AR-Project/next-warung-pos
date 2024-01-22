@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 type Props = {
-  register?: (payload: RegisterUserPayload) => Promise<void>;
+  register: (payload: RegisterUserPayload) => Promise<void>;
 };
 
 export default function RegisterInput({ register }: Props) {
@@ -30,9 +30,7 @@ export default function RegisterInput({ register }: Props) {
 
   async function onSubmitHandler(event: { preventDefault: () => void }) {
     event.preventDefault();
-    if (register !== undefined) {
-      await register(registerPayload);
-    }
+    await register(registerPayload);
   }
 
   return (

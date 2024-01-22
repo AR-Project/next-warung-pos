@@ -8,5 +8,5 @@ export const activity = pgTable("logs", {
   userId: text("user_id").references(() => user.id),
   storeId: text("store_id"),
   targetId: text("target_id"),
-  message: text("message"),
+  task: text("message"),
 });

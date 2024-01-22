@@ -6,13 +6,13 @@ type props = {
 
 export default async function Layout({ children }: props) {
   return (
-    <ProtectOnServer type="loggedIn" callback="/settings">
-      <section>
-        <div className="flex flex-row w-screen">
-          <p>Settings page</p>
+    <ProtectOnServer type="loggedIn" callback="/profile">
+      <>
+        <div className="flex flex-row w-screen bg-blue-950 bg-opacity-70">
+          <h1>Profile Page</h1>
         </div>
         {children}
-      </section>
+      </>
     </ProtectOnServer>
   );
 }
