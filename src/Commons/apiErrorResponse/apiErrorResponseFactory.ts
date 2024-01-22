@@ -5,6 +5,10 @@ import DomainErrorTranslator, {
 import ClientError from "../exceptions/ClientError";
 
 export default function apiErrorResponse(err: Error, payload?: any) {
+  if (process.env.NODE_ENV === "development") {
+    console.log(err);
+  }
+
   const translatedError: ITranslatedError =
     DomainErrorTranslator.translate(err);
 

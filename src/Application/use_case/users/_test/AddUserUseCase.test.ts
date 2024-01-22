@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { mock } from "vitest-mock-extended";
 
 import RegisterUser from "../../../../Domains/users/entities/RegisterUser.js";
@@ -11,16 +13,16 @@ describe.skip("AddUserUseCase", () => {
   it("should orchestrating the add user action correctly", async () => {
     // Arrange
     const useCasePayload: IAddUserPayload = {
-      username: "dicoding",
+      username: "warpos",
       password: "secretPassword",
-      fullname: "Dicoding Indonesia",
+      fullName: "warpos",
       email: "test@test.com",
       key: "superSecretKeyToBeAdmin",
     };
     const expectedRegisteredUser = new RegisteredUser({
       id: "user-123",
       username: useCasePayload.username,
-      fullname: useCasePayload.fullname,
+      fullName: useCasePayload.fullName,
       role: "admin",
     });
 
@@ -62,7 +64,7 @@ describe.skip("AddUserUseCase", () => {
       new RegisterUser({
         username: useCasePayload.username,
         password: "encrypted_password",
-        fullname: useCasePayload.fullname,
+        fullName: useCasePayload.fullName,
         role: "admin",
       })
     );
@@ -71,14 +73,14 @@ describe.skip("AddUserUseCase", () => {
   it("should orchestrating the add user action correctly without key", async () => {
     // Arrange
     const useCasePayload: IAddUserPayload = {
-      username: "dicoding",
+      username: "warpos",
       password: "secretPassword",
-      fullname: "Dicoding Indonesia",
+      fullName: "warpos",
     };
     const expectedRegisteredUser = new RegisteredUser({
       id: "user-123",
       username: useCasePayload.username,
-      fullname: useCasePayload.fullname,
+      fullName: useCasePayload.fullName,
       role: "base",
     });
 
@@ -120,8 +122,9 @@ describe.skip("AddUserUseCase", () => {
       new RegisterUser({
         username: useCasePayload.username,
         password: "encrypted_password",
-        fullname: useCasePayload.fullname,
+        fullName: useCasePayload.fullName,
         role: "base",
+        email: "nope",
       })
     );
   });

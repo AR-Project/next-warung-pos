@@ -51,42 +51,6 @@ DomainErrorTranslator._directories = {
     new InvariantError("harus mengirimkan token refresh"),
   "DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION":
     new InvariantError("refresh token harus string"),
-  "CREDENTIALS.NOT_CONTAIN_NEEDED_PROPERTY": new AuthenticationError(
-    "Missing authentication"
-  ),
-  "CREDENTIALS.NOT_MEET_DATA_TYPE_SPECIFICATION": new AuthenticationError(
-    "Missing authentication"
-  ),
-  "NEW_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
-    "tidak bisa membuat thread baru, data tidak sesuai"
-  ),
-  "NEW_THREAD.NOT_CONTAIN_NEEDED_PROPERTY": new InvariantError(
-    "tidak bisa membuat thread baru, data tidak lengkap"
-  ),
-  "COMMENT.MISSING_CONTENT": new InvariantError(
-    "tidak bisa membuat komentar baru, data tidak lengkap"
-  ),
-  "COMMENT.MISSING_OWNER": new InvariantError(
-    "tidak bisa membuat komentar baru, data tidak lengkap"
-  ),
-  "COMMENT.MISSING_THREAD_ID": new InvariantError(
-    "tidak bisa membuat komentar baru, data tidak lengkap"
-  ),
-  "COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
-    "tidak bisa membuat komentar baru, data tidak sesuai"
-  ),
-  "REPLY.MISSING_CONTENT": new InvariantError(
-    "tidak bisa membuat balasan komentar baru, data tidak lengkap"
-  ),
-  "REPLY.MISSING_OWNER": new InvariantError(
-    "tidak bisa membuat balasan komentar baru, data tidak lengkap"
-  ),
-  "REPLY.MISSING_COMMENT_ID": new InvariantError(
-    "tidak bisa membuat balasan komentar baru, data tidak lengkap"
-  ),
-  "REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
-    "tidak bisa membuat balasan komentar baru, data tidak sesuai"
-  ),
   "TESTING.CUSTOM_ERROR": new InvariantError("error for testing purpose"),
 };
 

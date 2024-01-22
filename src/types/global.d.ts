@@ -2,7 +2,7 @@ export {};
 
 declare global {
   type VerifyPayload<T> = {
-    _verifyPayload: (T) => void;
+    _verifyPayload: (payload: T) => void;
   };
 
   /**
