@@ -16,8 +16,6 @@ export async function POST(request: Request) {
       isAvailable: true,
     });
   } catch (error: Error | any) {
-    console.log(error);
-
     return apiErrorResponse(error, payload);
   }
 }

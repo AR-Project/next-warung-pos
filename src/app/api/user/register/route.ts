@@ -25,9 +25,6 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error: Error | any) {
-    if (process.env.NODE_ENV === "development") {
-      console.log(error);
-    }
     return apiErrorResponse(error);
   }
 }
