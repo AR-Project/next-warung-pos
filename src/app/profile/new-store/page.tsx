@@ -1,37 +1,26 @@
 "use client";
-import { redirect, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useFormInputs } from "@/presentation/hooks/useFormInput";
+import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
-  const [addStorePayload, setAddStorePayload] = useState({
-    name: "",
-  });
 
-  function handleChange(event: { target: HTMLInputElement }): void {
-    setAddStorePayload((prevPayload) => {
-      const { name } = event.target;
-      const { value } = event.target;
-      return {
-        ...prevPayload,
-        [name]: value,
-      };
-    });
-  }
+  const { payload, handleChange } = useFormInputs<{ name: string }>(["name"]);
 
   async function onSubmitHandler(event: { preventDefault: () => void }) {
     event.preventDefault();
     const response = await fetch("/api/store", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(addStorePayload),
+      body: JSON.stringify(payload),
     });
+
     const data = (await response.json()) as {
       status: "success" | "fail";
       data: { storeId: string };
     };
-    console.log(data);
+
     if (response.status !== 201) {
       console.log(data);
       toast.error("error");
@@ -54,9 +43,15 @@ export default function Page() {
           id="name"
           name="name"
           onChange={handleChange}
-          value={addStorePayload.name}
+          value={payload.name}
+          required
         />
-        <button type="submit">Create Store</button>
+        <button
+          type="submit"
+          className="border border-white rounded-md p-2 bg-slate-800 hover:bg-slate-600"
+        >
+          Create Store
+        </button>
       </form>
       <ToastContainer position="bottom-left" theme="dark" autoClose={7000} />
     </>

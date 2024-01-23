@@ -50,7 +50,6 @@ describe("UserRepository", () => {
 
       const persistedUser = await userTableTestHelper.findUserById("user-123");
       expect(persistedUser).toHaveLength(1);
-      console.log(persistedUser);
     });
 
     it("should persist new user in database, and return user object", async () => {

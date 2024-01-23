@@ -9,8 +9,6 @@ export default async function useCase(payload: ChangeUserPasswordPayload) {
     await changeUserPasswordUseCase.execute(payload);
     return { status: "success" };
   } catch (error: any) {
-    console.log("ACTION LOG ERROR", error.message);
-
     return { status: "error", message: error.message };
   }
 }

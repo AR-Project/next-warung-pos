@@ -18,10 +18,8 @@ export default function Register() {
     });
 
     const resultJson = await result.json();
-    console.log(resultJson);
 
     if (resultJson.status === "success") {
-      console.log("register User is success");
       push("/login");
     }
     toast.error(resultJson.message);
