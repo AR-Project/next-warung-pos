@@ -6,10 +6,7 @@ type Props = {
 };
 
 export default function LoginInput({ onLoginHandler }: Props) {
-  const { payload, handleChange } = useFormInputs<LoginPayload>([
-    "username",
-    "password",
-  ]);
+  const { payload, handleChange } = useFormInputs(["username", "password"]);
 
   async function onSubmitHandler(event: { preventDefault: () => void }) {
     event.preventDefault();
@@ -30,6 +27,7 @@ export default function LoginInput({ onLoginHandler }: Props) {
         id="username"
         name="username"
         value={payload.username}
+        required
       />
 
       <input
@@ -41,6 +39,7 @@ export default function LoginInput({ onLoginHandler }: Props) {
         name="password"
         value={payload.password}
         onChange={handleChange}
+        required
       />
 
       <button
