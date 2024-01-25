@@ -1,4 +1,4 @@
-import ILogsRepository from "@/Domains/logs/ILogRepository";
+import ILogRepository from "@/Domains/logs/ILogRepository";
 import type IIdGenerator from "@/Application/tools/IdGenerator";
 
 import { type PostgresJsDatabase } from "drizzle-orm/postgres-js";
@@ -7,7 +7,7 @@ import { injectable, inject } from "tsyringe";
 import { activity } from "../database/schema/log";
 
 @injectable()
-export default class LogsRepository implements ILogsRepository {
+export default class LogRepository implements ILogRepository {
   _db: PostgresJsDatabase<Record<string, never>>;
   _idGenerator: IIdGenerator;
 

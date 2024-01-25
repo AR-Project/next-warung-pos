@@ -4,6 +4,7 @@ import { type IRegisteredUser } from "@/Domains/users/entities/RegisteredUser";
 import type IUserRepository from "@/Domains/users/IUserRepository";
 import type IPasswordHash from "@/Application/security/PasswordHash";
 import type IRoleCheck from "@/Application/security/RoleCheck";
+import type ILogRepository from "@/Domains/logs/ILogRepository";
 
 export interface IAddUserPayload {
   username: string;
@@ -16,15 +17,18 @@ export interface IAddUserPayload {
 @injectable()
 export default class AddUserUseCase {
   _userRepository: IUserRepository;
+  _logRepository: ILogRepository;
   _passwordHash: IPasswordHash;
   _roleCheck: IRoleCheck;
 
   constructor(
     @inject("IUserRepository") userRepository: IUserRepository,
+    @inject("ILogRepository") logRepository: ILogRepository,
     @inject("IPasswordHash") passwordHash: IPasswordHash,
     @inject("IRoleCheck") roleCheck: IRoleCheck
   ) {
     this._userRepository = userRepository;
+    this._logRepository = logRepository;
     this._passwordHash = passwordHash;
     this._roleCheck = roleCheck;
   }
@@ -49,6 +53,11 @@ export default class AddUserUseCase {
       registerUser.password
     );
 
-    return this._userRepository.addUser(registerUser);
+    const registeredUser = await this._userRepository.addUser(registerUser);
+    await this._logRepository.log({
+      task: `added user ${registeredUser.id}`,
+    });
+
+    return registeredUser;
   }
 }

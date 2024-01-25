@@ -26,10 +26,10 @@ declare global {
    */
 
   type ActivityLog = {
-    userId: string;
-    storeId: string | null;
-    targetId: string;
-    message: string;
+    userId?: string;
+    storeId?: string;
+    targetId?: string;
+    task: string;
   };
   type ActivityLogRepository = ActivityLog & {
     id: string;
