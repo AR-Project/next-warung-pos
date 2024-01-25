@@ -1,3 +1,3 @@
-export default interface ILogsRepository {
+export default interface ILogRepository {
   log: (payload: ActivityLog) => Promise<void>;
 }
