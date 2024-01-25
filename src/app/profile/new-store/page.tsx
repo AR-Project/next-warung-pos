@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 export default function Page() {
   const router = useRouter();
 
-  const { payload, handleChange } = useFormInputs<{ name: string }>(["name"]);
+  const { payload, handleChange } = useFormInputs(["name"]);
 
   async function onSubmitHandler(event: { preventDefault: () => void }) {
     event.preventDefault();

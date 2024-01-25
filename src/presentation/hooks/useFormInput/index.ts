@@ -1,7 +1,12 @@
 import { useState } from "react";
 
-export function useFormInputs<T = Record<string, string>>(strings: string[]) {
-  const initialPayloads: T = Object.assign(
+export function useFormInputs<T extends string>(
+  strings: T[]
+): {
+  payload: Record<T, string>;
+  handleChange: (event: { target: HTMLInputElement }) => void;
+} {
+  const initialPayloads: Record<string, string> = Object.assign(
     {},
     ...strings.map((key) => ({ [key]: "" }))
   );
@@ -10,8 +15,7 @@ export function useFormInputs<T = Record<string, string>>(strings: string[]) {
 
   function handleChange(event: { target: HTMLInputElement }) {
     setPayload((prevPayload) => {
-      const { name } = event.target;
-      const { value } = event.target;
+      const { name, value } = event.target;
       return {
         ...prevPayload,
         [name]: value,
