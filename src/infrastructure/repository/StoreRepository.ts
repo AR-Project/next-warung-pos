@@ -27,7 +27,7 @@ export default class StoreRepository implements IStoreRepository {
   async addStore(payload: IAddStore) {
     const addStore = await this._db
       .insert(stores)
-      .values({ id: `store-${this._idGenerator.generate()}`, ...payload })
+      .values({ id: `${this._idGenerator.generate(8)}`, ...payload })
       .returning({ id: stores.id });
 
     return addStore[0].id;

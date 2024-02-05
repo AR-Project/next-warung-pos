@@ -1,21 +1,20 @@
 import getAppSession from "@/presentation/utils/getAppSession";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { getStore } from "./action";
+import SelectStore from "./SelectStore";
 
 export default async function Profile() {
   const session = await getAppSession();
-
   if (!session) {
     redirect("/login");
   }
 
+  const data = await getStore(session.user.id);
+
   return (
     <>
-      <div className="text-sm text-gray-500">
-        Profile Details, address, billing, info, total store owned
-      </div>
-
-      {/* TODO: Create component that display active store */}
+      <SelectStore stores={data} />
       <Link
         className="border p-1 rounded-md bg-gray-500 hover:bg-blue-500"
         href="./new-store"
@@ -25,3 +24,6 @@ export default async function Profile() {
     </>
   );
 }
+
+export const dynamic = "force-dynamic";
+// 'auto' | 'force-dynamic' | 'error' | 'force-static'

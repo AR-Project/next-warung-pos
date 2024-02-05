@@ -9,8 +9,10 @@ declare global {
     key?: string;
   };
 
+  type UserId = string;
+
   type ChangeUserPasswordPayload = {
-    userId: string;
+    userId: UserId;
     password: string;
     newPassword: string;
   };
