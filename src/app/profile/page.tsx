@@ -1,7 +1,7 @@
 import getAppSession from "@/presentation/utils/getAppSession";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getStore } from "./action";
+import { getStoresByUserId } from "./action";
 import SelectStore from "./SelectStore";
 
 export default async function Profile() {
@@ -10,7 +10,7 @@ export default async function Profile() {
     redirect("/login");
   }
 
-  const data = await getStore(session.user.id);
+  const data = await getStoresByUserId(session.user.id);
 
   return (
     <>
