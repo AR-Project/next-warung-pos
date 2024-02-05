@@ -1,19 +1,21 @@
 import IIdGenerator from "@/Application/tools/IdGenerator";
-import { nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
 
 class NanoIdInfrastructure implements IIdGenerator {
-  _generator: () => string;
+  _generator: (size?: number) => string;
 
   constructor(nanoid: () => string) {
     this._generator = nanoid;
   }
 
-  generate(): string {
-    return this._generator();
+  generate(size?: number): string {
+    return this._generator(size);
   }
 }
 
-const singleton = new NanoIdInfrastructure(nanoid);
+const alphabet = "abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ";
+
+const singleton = new NanoIdInfrastructure(customAlphabet(alphabet));
 
 Object.freeze(singleton);
 

@@ -41,12 +41,16 @@ export const authOptionsFactory = (
       maxAge: 60 * 60 * 24 * 30,
     },
     callbacks: {
-      async jwt({ token, user }) {
+      async jwt({ token, trigger, user, session }) {
         if (user) {
           token.role = user.role;
           token.id = user.id;
           token.username = user.username;
           token.name = user.fullName;
+        }
+
+        if (trigger == "update") {
+          token.activeStore = session.activeStore;
         }
         return token;
       },
@@ -56,6 +60,7 @@ export const authOptionsFactory = (
           session.user.id = token.id;
           session.user.username = token.username;
           session.user.name = token.name as string;
+          session.user.activeStore = token.activeStore;
         }
         return session;
       },
@@ -64,5 +69,5 @@ export const authOptionsFactory = (
     pages: {
       signIn: "/login",
     },
-  };
+  } satisfies AuthOptions;
 };

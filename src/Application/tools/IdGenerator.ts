@@ -1,3 +1,3 @@
 export default interface IIdGenerator {
-  generate: () => string;
+  generate: (length?: number) => string;
 }

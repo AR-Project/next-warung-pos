@@ -33,3 +33,5 @@ export default function Register() {
     </main>
   );
 }
+
+export const dynamic = "force-dynamic";

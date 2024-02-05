@@ -26,8 +26,10 @@ export default function Page() {
       toast.error("error");
     }
     if (response.status === 201) {
-      localStorage.setItem("storeId", data.data.storeId);
-      router.push("../");
+      toast.success("Store Created");
+      setTimeout(() => {
+        router.push("../");
+      }, 3000);
     }
   }
 
