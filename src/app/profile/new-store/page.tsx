@@ -1,15 +1,18 @@
 "use client";
 import { useFormInputs } from "@/presentation/hooks/useFormInput";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
 
   const { payload, handleChange } = useFormInputs(["name"]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function onSubmitHandler(event: { preventDefault: () => void }) {
     event.preventDefault();
+    setLoading(true);
     const response = await fetch("/api/store", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -24,6 +27,7 @@ export default function Page() {
     if (response.status !== 201) {
       console.log(data);
       toast.error("error");
+      setLoading(false);
     }
     if (response.status === 201) {
       toast.success("Store Created");
@@ -50,7 +54,10 @@ export default function Page() {
         />
         <button
           type="submit"
-          className="border border-white rounded-md p-2 bg-slate-800 hover:bg-slate-600"
+          className={`${
+            loading && "cursor-not-allowed"
+          } border border-white rounded-md p-2 bg-slate-800 hover:bg-slate-600`}
+          disabled={loading}
         >
           Create Store
         </button>

@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import container from "@/infrastructure/container";
 import AddStoreUseCase from "@/Application/use_case/stores/AddStoreUseCase";
 import GetStoresUseCase from "@/Application/use_case/stores/GetAllStoreUseCase";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request: NextRequest) {
   const session = await getAppSession();
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
   const store = container.resolve(AddStoreUseCase);
   try {
     const storeId = await store.execute(payload);
+    revalidatePath("/profile", "page");
     return NextResponse.json(
       { status: "success", data: { storeId } },
       { status: 201 }
