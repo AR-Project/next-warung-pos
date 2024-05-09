@@ -10,10 +10,12 @@ export default defineConfig({
     include: ["**/*.test.{js,ts,jsx,tsx,mdx}"],
     globals: true,
     setupFiles: ["dotenv/config", "reflect-metadata"],
+    fileParallelism: false,
   },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@test": path.resolve(__dirname, "./test"),
     },
   },
 });

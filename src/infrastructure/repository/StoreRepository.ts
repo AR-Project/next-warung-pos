@@ -6,8 +6,6 @@ import { eq, or } from "drizzle-orm";
 import type IIdGenerator from "@/Application/tools/IdGenerator";
 import type IStoreRepository from "@/Domains/stores/IStoreRepository";
 
-import InvariantError from "@/Commons/exceptions/InvariantError";
-
 import { stores } from "../database/schema/stores";
 import NotFoundError from "@/Commons/exceptions/NotFoundError";
 
@@ -31,6 +29,17 @@ export default class StoreRepository implements IStoreRepository {
       .returning({ id: stores.id });
 
     return addStore[0].id;
+  }
+
+  async verifyStoreId(payload: StoreId) {
+    const store = await this._db
+      .select()
+      .from(stores)
+      .where(eq(stores.id, payload));
+
+    if (store.length !== 1) {
+      throw new NotFoundError("storeId not valid");
+    }
   }
 
   async getStoreInfo(storeId: string) {

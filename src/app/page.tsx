@@ -10,6 +10,10 @@ export default async function Home() {
     redirect("/login");
   }
 
+  if (session.user.activeStore) {
+    redirect(`/store/${session.user.activeStore}`);
+  }
+
   return (
     <main className="flex flex-col items-center justify-center h-full bg-zinc-700 gap-4">
       {session.user.activeStore && (

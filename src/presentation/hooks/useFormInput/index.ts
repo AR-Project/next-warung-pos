@@ -1,11 +1,19 @@
 import { useState } from "react";
 
+/**
+ *
+ * @param strings Array of string that become the key of payload object
+ * @returns Array that contains payload and handle change payload
+ */
+
+type IUseFormInput<T extends string> = [
+  payload: Record<T, string>,
+  handleChange: (event: { target: HTMLInputElement }) => void
+];
+
 export function useFormInputs<T extends string>(
   strings: T[]
-): {
-  payload: Record<T, string>;
-  handleChange: (event: { target: HTMLInputElement }) => void;
-} {
+): IUseFormInput<T> {
   const initialPayloads: Record<string, string> = Object.assign(
     {},
     ...strings.map((key) => ({ [key]: "" }))
@@ -23,5 +31,5 @@ export function useFormInputs<T extends string>(
     });
   }
 
-  return { payload, handleChange };
+  return [payload, handleChange] as const;
 }

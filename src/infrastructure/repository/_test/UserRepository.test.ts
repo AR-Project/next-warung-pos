@@ -17,9 +17,11 @@ describe("UserRepository", () => {
   });
 
   describe("verifyAvailableUsername method", () => {
-    it("should throw Invariant Error when username is already exist", async () => {
+    beforeAll(async () => {
       await userTableTestHelper.addUser({ username: "tester" });
+    });
 
+    it("should throw Invariant Error when username is already exist", async () => {
       const userRepository = new UserRepository(db, fakeIdGenerator);
       await expect(
         userRepository.verifyAvailableUsername("tester")
@@ -28,9 +30,9 @@ describe("UserRepository", () => {
 
     it("should NOT throw error, when username is available / no username in database", async () => {
       const userRepository = new UserRepository(db, fakeIdGenerator);
-      await expect(userRepository.verifyAvailableUsername("tester")).resolves;
+      await expect(userRepository.verifyAvailableUsername("safe")).resolves;
       await expect(
-        userRepository.verifyAvailableUsername("tester")
+        userRepository.verifyAvailableUsername("safe")
       ).not.toThrowError(InvariantError);
     });
   });
@@ -38,9 +40,9 @@ describe("UserRepository", () => {
   describe("addUser method", () => {
     it("should persist new user from registerUser class in database", async () => {
       const payload: IRegisterUser = {
-        username: "warungpos",
+        username: "testuserrepo",
         password: "secretpassword",
-        fullName: "Warung Pos",
+        fullName: "Test User Repo",
         email: "test@test.com",
         role: "user",
       };
@@ -54,9 +56,9 @@ describe("UserRepository", () => {
 
     it("should persist new user in database, and return user object", async () => {
       const payload: IRegisterUser = {
-        username: "warungpos",
+        username: "testuserrepo",
         password: "secretpassword",
-        fullName: "Warung Pos",
+        fullName: "Test User Repo",
         email: "test@test.com",
         role: "user",
       };
@@ -69,8 +71,8 @@ describe("UserRepository", () => {
       expect(returnedValue).toEqual(
         new RegisteredUser({
           id: "user-123",
-          username: "warungpos",
-          fullName: "Warung Pos",
+          username: "testuserrepo",
+          fullName: "Test User Repo",
           role: "user",
         })
       );
@@ -97,6 +99,7 @@ describe("UserRepository", () => {
       expect(password).toEqual("secretpassword");
     });
   });
+
   describe("updatePassword method", () => {
     test("should update password on database", async () => {
       // Prepare

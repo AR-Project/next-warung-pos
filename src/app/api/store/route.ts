@@ -5,14 +5,12 @@ import container from "@/infrastructure/container";
 import AddStoreUseCase from "@/Application/use_case/stores/AddStoreUseCase";
 import GetStoresUseCase from "@/Application/use_case/stores/GetAllStoreUseCase";
 import { revalidatePath } from "next/cache";
+import { forbidden, forbiddenCode } from "@/app/api/_lib/message";
 
 export async function POST(request: NextRequest) {
   const session = await getAppSession();
   if (!session) {
-    return NextResponse.json(
-      { status: "fail", message: "Not Authorize" },
-      { status: 403 }
-    );
+    return NextResponse.json(forbidden, forbiddenCode);
   }
   const { name } = (await request.json()) as { name: string };
 
@@ -23,7 +21,7 @@ export async function POST(request: NextRequest) {
   const store = container.resolve(AddStoreUseCase);
   try {
     const storeId = await store.execute(payload);
-    revalidatePath("/profile", "page");
+    revalidatePath("/profile/", "page");
     return NextResponse.json(
       { status: "success", data: { storeId } },
       { status: 201 }
@@ -36,10 +34,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   const session = await getAppSession();
   if (!session) {
-    return NextResponse.json(
-      { status: "fail", message: "Not Authorize" },
-      { status: 403 }
-    );
+    return NextResponse.json(forbidden, forbiddenCode);
   }
 
   const { userId } = (await request.json()) as { userId: UserId };

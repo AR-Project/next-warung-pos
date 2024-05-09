@@ -2,15 +2,6 @@ import { eq } from "drizzle-orm";
 import db from "@/infrastructure/database/orm/db";
 import { user } from "@/infrastructure/database/schema/user";
 
-interface IUserRow {
-  id?: string;
-  username?: string;
-  fullName?: string;
-  email?: string;
-  role?: string;
-  password?: string;
-}
-
 const userTableTestHelper = {
   async addUser({
     id = "user-001",
@@ -19,7 +10,7 @@ const userTableTestHelper = {
     email = "warungpos@arproject.my.id",
     role = "user",
     password = "password",
-  }: IUserRow) {
+  }: Partial<IUserRow>) {
     await db
       .insert(user)
       .values({ id, username, fullName, email, role, password });

@@ -36,7 +36,7 @@ export default function UserInfo() {
         <Menu.Items className="absolute flex flex-col gap-2 items-center bg-white text-black px-1 py-3 right-0 w-60 rounded-md">
           <Menu.Item as="div">
             {({ close }) => (
-              <Link href="./profile" onClick={close}>
+              <Link href="/profile" onClick={close}>
                 <div className="aspect-square h-20 bg-gray-400">picture</div>
               </Link>
             )}

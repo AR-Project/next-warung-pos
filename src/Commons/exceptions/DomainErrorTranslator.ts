@@ -52,6 +52,18 @@ DomainErrorTranslator._directories = {
   "DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION":
     new InvariantError("refresh token harus string"),
   "TESTING.CUSTOM_ERROR": new InvariantError("error for testing purpose"),
+  "ADD_STORE.PAYLOAD_EMPTY": new InvariantError(
+    "form tidak lengkap, gagal membuat toko baru"
+  ),
+  "ADD_STORE.INVALID_PAYLOAD": new InvariantError(
+    "data tidak valid, gagal membuat toko baru"
+  ),
+  "ADD_MENU_CATEGORY.PAYLOAD_EMPTY": new InvariantError(
+    "data tidak lengkap, gagal memembuat kategori baru"
+  ),
+  "ADD_MENU_CATEGORY.INVALID_PAYLOAD": new InvariantError(
+    "data tidak sah, gagal membuat kategori baru"
+  ),
 };
 
 export default DomainErrorTranslator;

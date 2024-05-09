@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function LoginInput({ onLoginHandler }: Props) {
-  const { payload, handleChange } = useFormInputs(["username", "password"]);
+  const [payload, handleChange] = useFormInputs(["username", "password"]);
 
   async function onSubmitHandler(event: { preventDefault: () => void }) {
     event.preventDefault();

@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type Props = {
   stores?: StoreInfo[];
@@ -9,6 +10,7 @@ type Props = {
 
 export default function SelectStore({ stores }: Props) {
   const { data, update } = useSession();
+  const router = useRouter();
 
   if (!stores) {
     return <>You dont have any store,</>;
@@ -16,6 +18,7 @@ export default function SelectStore({ stores }: Props) {
 
   async function selectStore(storeId: string) {
     await update({ activeStore: storeId });
+    router.push(`/store/${storeId}`);
   }
 
   return (

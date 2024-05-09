@@ -3,7 +3,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import AddStore from "../AddStore";
 
-describe("AddStore Entities", () => {
+describe.concurrent("AddStore Entities", () => {
   it("should throw error when no data is supplied", () => {
     expect(() => new AddStore()).toThrowError("ADD_STORE.PAYLOAD_EMPTY");
   });

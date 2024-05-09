@@ -16,6 +16,7 @@ export default function apiErrorResponse(err: Error, payload?: any) {
   if (translatedError instanceof ClientError) {
     const jsonErrorResponse = {
       status: "fail",
+      error: translatedError.message,
       message: translatedError.message,
       payload,
     };
@@ -26,7 +27,7 @@ export default function apiErrorResponse(err: Error, payload?: any) {
   }
 
   return NextResponse.json(
-    { status: "error", message: "Internal Error" },
+    { status: "error", message: "Internal Error", error: "Internal Error" },
     { status: 500 }
   );
 }

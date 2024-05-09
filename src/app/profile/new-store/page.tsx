@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 export default function Page() {
   const router = useRouter();
 
-  const { payload, handleChange } = useFormInputs(["name"]);
+  const [payload, handleChange] = useFormInputs(["name"]);
   const [loading, setLoading] = useState<boolean>(false);
 
   async function onSubmitHandler(event: { preventDefault: () => void }) {
@@ -25,7 +25,6 @@ export default function Page() {
     };
 
     if (response.status !== 201) {
-      console.log(data);
       toast.error("error");
       setLoading(false);
     }
