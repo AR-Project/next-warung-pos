@@ -2,6 +2,29 @@ import { getCategoriesAction } from "./action";
 
 import { BackButton } from "@/presentation/component/BackButton";
 import { DefaultButton } from "@/presentation/component/DefaultButton";
+import DeleteCategoryButton from "./DeleteCategoryButton";
+
+type CategoryProps = IMenuCategoryInfo & {
+  // TODO
+};
+
+async function MenuCategory(props: CategoryProps) {
+  return (
+    <div className="p-2 flex flex-row content-between justify-between">
+      <div className="flex flex-row gap-2">
+        <div
+          style={{ backgroundColor: props.color }}
+          className="h-auto w-1"
+        ></div>
+        {props.name}
+      </div>
+      <div className="flex flex-row">
+        🔼🔽
+        <DeleteCategoryButton categoryId={props.id} />
+      </div>
+    </div>
+  );
+}
 
 export default async function Page() {
   const result = await getCategoriesAction();
@@ -16,13 +39,11 @@ export default async function Page() {
       </div>
 
       {result.data !== undefined && (
-        <ol>
+        <div className="py-4">
           {result.data?.map((category) => (
-            <li style={{ color: category.color }} key={category.id}>
-              {category.name}
-            </li>
+            <MenuCategory {...category} key={category.id} />
           ))}
-        </ol>
+        </div>
       )}
 
       {/* TODO: Front-end display all categories with each menu */}

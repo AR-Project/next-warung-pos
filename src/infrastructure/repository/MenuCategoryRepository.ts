@@ -40,8 +40,6 @@ export default class MenuCategoryRepository
       payload.storeId
     );
 
-    // BUG: Resolve confict of sortOrder when soft delete a category
-
     const category = await this._db
       .insert(storeMenuCategories)
       .values({
@@ -55,14 +53,14 @@ export default class MenuCategoryRepository
     return category[0].id;
   }
 
-  async getMenuCategoryInfo(payload: string) {
+  async getMenuCategoryInfo(payload: string, withDeleted = false) {
     const category = await this._db
       .select()
       .from(storeMenuCategories)
       .where(
         and(
           eq(storeMenuCategories.id, payload),
-          eq(storeMenuCategories.isDeleted, false)
+          eq(storeMenuCategories.isDeleted, withDeleted)
         )
       );
 

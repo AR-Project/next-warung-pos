@@ -274,7 +274,8 @@ describe.sequential("Menu Category Repository", () => {
       );
       await menuCategoryRepository.deleteMenuCategory("cat-01");
       const deletedCategory = await menuCategoryRepository.getMenuCategoryInfo(
-        "cat-01"
+        "cat-01",
+        true
       );
 
       // Assert

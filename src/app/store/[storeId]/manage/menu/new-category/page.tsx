@@ -48,6 +48,7 @@ export default function Page() {
     if (response.status === 201) {
       setIsLoading(false);
       toast.success("Berhasil membembuat kategori baru");
+      router.refresh();
       setTimeout(() => {
         router.push("../");
       }, 2000);
