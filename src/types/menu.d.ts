@@ -17,7 +17,7 @@ declare global {
   type CategoryId = string;
 
   type IAddMenuCategory = {
-    ownerId: string; // ISSUE: Should be named `userId` for consistency
+    userId: string;
     storeId: string;
     name: string;
     color?: string; // use inline style on UI
