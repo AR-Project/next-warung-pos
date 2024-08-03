@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
   const compliedPayload = {
     ...payload,
-    ownerId: session.user.id,
+    userId: session.user.id,
     storeId: session.user.activeStore,
   };
 

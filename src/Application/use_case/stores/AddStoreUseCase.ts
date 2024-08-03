@@ -23,12 +23,12 @@ export default class AddStoreUseCase {
   }
 
   async execute(useCasePayload: AddStoreUseCasePayload): Promise<StoreId> {
-    const { ownerId } = useCasePayload;
-    await this._userRepository.verifyUserId(ownerId);
+    const { userId } = useCasePayload;
+    await this._userRepository.verifyUserId(userId);
     const storeId = await this._storeRepository.addStore(useCasePayload);
 
     await this._logRepository.log({
-      userId: ownerId,
+      userId,
       storeId: storeId,
       task: "create store",
     });

@@ -32,7 +32,7 @@ describe.sequential("Menu Item Repository", () => {
     const stubStore: IStoreRow = {
       id: "store-123",
       name: "Test Category Repo",
-      ownerId: stubUser.id,
+      userId: stubUser.id,
       createdAt: new Date("1 Jan 2000").toUTCString(),
       modifiedAt: new Date("1 Jan 2000").toUTCString(),
     };

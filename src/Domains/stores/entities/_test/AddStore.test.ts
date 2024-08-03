@@ -11,7 +11,7 @@ describe.concurrent("AddStore Entities", () => {
   it("should throw error when invalid type / missing payload is supplied", () => {
     // Arrange
     const payload = {
-      ownerId: 123,
+      userId: 123,
       name: true,
     };
 
@@ -22,13 +22,13 @@ describe.concurrent("AddStore Entities", () => {
 
   it("should create AddStore Object correctly when supplied with correct payload", () => {
     const payload: IAddStore = {
-      ownerId: "user-123",
+      userId: "user-123",
       name: "Test Store",
     };
 
     const addStore = new AddStore(payload);
 
-    expect(addStore.ownerId).toBe("user-123");
+    expect(addStore.userId).toBe("user-123");
     expect(addStore.name).toBe("Test Store");
   });
 });

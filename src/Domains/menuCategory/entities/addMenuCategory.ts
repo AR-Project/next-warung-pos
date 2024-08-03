@@ -6,7 +6,7 @@ type IAddMenuCategoryEntity = Required<IAddMenuCategory> &
 const DEFAULT_COLOR = "#1d4ed8"; // Blue
 
 export default class AddMenuCategoryEntity implements IAddMenuCategoryEntity {
-  ownerId: string;
+  userId: string;
   storeId: string;
   name: string;
   color: string;
@@ -14,8 +14,8 @@ export default class AddMenuCategoryEntity implements IAddMenuCategoryEntity {
   constructor(payload: IAddMenuCategory) {
     this._verifyPayload(payload);
 
-    const { ownerId, storeId, name, color } = payload;
-    this.ownerId = ownerId;
+    const { userId, storeId, name, color } = payload;
+    this.userId = userId;
     this.storeId = storeId;
     this.name = name;
     this.color = color ? color : DEFAULT_COLOR;
@@ -28,7 +28,7 @@ export default class AddMenuCategoryEntity implements IAddMenuCategoryEntity {
 
     const payloadSchema = z
       .object({
-        ownerId: z.string(),
+        userId: z.string(),
         storeId: z.string(),
         name: z.string().min(3),
         color: z.string().length(7),

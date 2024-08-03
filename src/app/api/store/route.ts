@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
   const payload = {
     name,
-    ownerId: session.user.id,
+    userId: session.user.id,
   };
   const store = container.resolve(AddStoreUseCase);
   try {

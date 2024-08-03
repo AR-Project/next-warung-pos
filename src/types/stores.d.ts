@@ -2,7 +2,7 @@ export {};
 
 declare global {
   type IAddStore = {
-    ownerId: string;
+    userId: string;
     name: string;
   };
 
@@ -11,7 +11,7 @@ declare global {
   type StoreInfo = {
     name: string;
     id: StoreId;
-    ownerId: string;
+    userId: string;
     createdAt: string;
     modifiedAt: string;
   };
@@ -19,7 +19,7 @@ declare global {
   type IStoreRow = {
     id: string;
     name: string;
-    ownerId: string;
+    userId: string;
     createdAt: string;
     modifiedAt: string;
   };

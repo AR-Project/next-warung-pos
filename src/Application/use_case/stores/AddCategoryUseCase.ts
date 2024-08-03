@@ -29,8 +29,8 @@ export default class AddMenuCategoryUseCase {
   }
 
   async execute(payload: AddMenuCategoryUseCasePayload): Promise<CategoryId> {
-    const { ownerId, storeId } = payload;
-    await this._userRepository.verifyUserId(ownerId);
+    const { userId, storeId } = payload;
+    await this._userRepository.verifyUserId(userId);
     await this._storeRepository.verifyStoreId(storeId);
 
     const categoryPayload = new AddMenuCategoryEntity(payload);
@@ -44,7 +44,7 @@ export default class AddMenuCategoryUseCase {
     await this._logRepository.log({
       task: "category created",
       storeId,
-      userId: ownerId,
+      userId,
       targetId: categoryId,
     });
 

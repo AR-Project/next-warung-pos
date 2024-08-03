@@ -49,7 +49,6 @@ export default class MenuCategoryRepository
       .insert(storeMenuCategories)
       .values({
         id: `cat-${this._idGenerator.generate(10)}`,
-        userId: payload.ownerId,
         sortOrder: categoriesCount,
         ...payload,
       })
@@ -108,7 +107,6 @@ export default class MenuCategoryRepository
 
   async updateMenuCategory(payload: IUpdateMenuCategory) {
     const finalPayload: Partial<IMenuCategoryRow> = {
-      userId: payload.ownerId,
       storeId: payload.storeId,
       name: payload.name,
       color: payload.color,
