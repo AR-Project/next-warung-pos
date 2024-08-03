@@ -25,6 +25,16 @@ export default class MenuCategoryRepository
     this._db = db;
     this._idGenerator = idGenerator;
   }
+  async verifyId(id: CategoryId) {
+    const categories = await this._db
+      .select()
+      .from(storeMenuCategories)
+      .where(eq(storeMenuCategories.id, id));
+
+    if (categories.length === 0) {
+      throw new NotFoundError("Kategori tidak ditemukan");
+    }
+  }
 
   async getCategoriesCountByStoreId(storeId: StoreId) {
     const total = await this._db

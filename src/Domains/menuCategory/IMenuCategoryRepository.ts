@@ -1,5 +1,6 @@
 export interface IMenuCategoriesRepository {
   getCategoriesCountByStoreId: (storeId: StoreId) => Promise<number>;
+  verifyId: (id: CategoryId) => Promise<void>;
   addMenuCategory: (payload: Required<IAddMenuCategory>) => Promise<CategoryId>;
   getMenuCategoryInfo: (payload: CategoryId) => Promise<IMenuCategoryRow>;
   getAllCategoriesIdsByStoreId: (storeId: StoreId) => Promise<string[]>;

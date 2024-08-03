@@ -85,7 +85,23 @@ describe.sequential("Menu Category Repository", () => {
     });
   });
 
-  describe("addMenuCategory", async () => {
+  describe.sequential("verifyId method", async () => {
+    test("should throw error when no category Exist", async () => {
+      const menuCategoryRepository = new MenuCategoryRepository(
+        db,
+        fakeIdGenerator
+      );
+
+      await expect(() =>
+        menuCategoryRepository.verifyId("invalid_id")
+      ).rejects.toThrow("Kategori tidak ditemukan");
+      await expect(() =>
+        menuCategoryRepository.verifyId("invalid_id")
+      ).rejects.toThrowError(NotFoundError);
+    });
+  });
+
+  describe.sequential("addMenuCategory", async () => {
     test("should persist data correctly on database", async () => {
       const payloadA: Required<IAddMenuCategory> = {
         userId: "user-123",
