@@ -142,10 +142,6 @@ describe.sequential("Menu Item Repository", () => {
     },
   ];
 
-  test.sequential("Sanity Check", async () => {
-    expect(1).toBe(1);
-  });
-
   describe.sequential("countByCategoryId", async () => {
     test("should return correct value, when called with categoryId", async () => {
       await Promise.all(

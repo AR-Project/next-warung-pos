@@ -7,7 +7,7 @@ import RegisterUser, {
 } from "@/Domains/users/entities/RegisterUser";
 import RegisteredUser from "@/Domains/users/entities/RegisteredUser";
 
-describe("UserRepository", () => {
+describe.sequential("UserRepository", () => {
   const fakeIdGenerator = {
     generate: (): string => "123",
   }; // stub!
@@ -23,7 +23,7 @@ describe("UserRepository", () => {
 
     it("should throw Invariant Error when username is already exist", async () => {
       const userRepository = new UserRepository(db, fakeIdGenerator);
-      await expect(
+      await expect(() =>
         userRepository.verifyAvailableUsername("tester")
       ).rejects.toThrowError(InvariantError);
     });
@@ -31,7 +31,7 @@ describe("UserRepository", () => {
     it("should NOT throw error, when username is available / no username in database", async () => {
       const userRepository = new UserRepository(db, fakeIdGenerator);
       await expect(userRepository.verifyAvailableUsername("safe")).resolves;
-      await expect(
+      await expect(() =>
         userRepository.verifyAvailableUsername("safe")
       ).not.toThrowError(InvariantError);
     });

@@ -10,7 +10,7 @@ import { storeTableTestHelper } from "../../../../test/_testHelper/StoreTableHel
 import InvariantError from "@/Commons/exceptions/InvariantError";
 import NotFoundError from "@/Commons/exceptions/NotFoundError";
 
-describe("Store Repository", () => {
+describe.sequential("Store Repository", () => {
   const fakeIdGenerator = {
     generate: (): string => "123",
   };
