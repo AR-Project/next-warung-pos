@@ -30,7 +30,7 @@ describe.sequential("Menu Category Repository", () => {
     const stubStore: IStoreRow = {
       id: "store-123",
       name: "Test Category Repo",
-      ownerId: stubUser.id,
+      userId: "user-123",
       createdAt: new Date("1 Jan 2000").toUTCString(),
       modifiedAt: new Date("1 Jan 2000").toUTCString(),
     };
@@ -88,7 +88,7 @@ describe.sequential("Menu Category Repository", () => {
   describe("addMenuCategory", async () => {
     test("should persist data correctly on database", async () => {
       const payloadA: Required<IAddMenuCategory> = {
-        ownerId: "user-123",
+        userId: "user-123",
         storeId: "store-123",
         name: "Test Category #1",
         color: "#ffffff",
@@ -135,13 +135,13 @@ describe.sequential("Menu Category Repository", () => {
       };
 
       const payloadA: Required<IAddMenuCategory> = {
-        ownerId: "user-123",
+        userId: "user-123",
         storeId: "store-123",
         name: "Test Category #1",
         color: "#ffffff",
       };
       const payloadB: Required<IAddMenuCategory> = {
-        ownerId: "user-123",
+        userId: "user-123",
         storeId: "store-123",
         name: "Test Category #2",
         color: "#ffffff",

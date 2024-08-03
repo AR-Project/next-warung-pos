@@ -59,7 +59,7 @@ export default class StoreRepository implements IStoreRepository {
     const storeInfo = await this._db
       .select()
       .from(stores)
-      .where(eq(stores.ownerId, userId));
+      .where(eq(stores.userId, userId));
 
     return storeInfo;
   }

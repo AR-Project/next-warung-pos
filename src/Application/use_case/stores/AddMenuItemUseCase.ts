@@ -30,11 +30,12 @@ export default class AddMenuCategoryUseCase {
     this._storeRepository = storeRepository;
     this._logRepository = logRepository;
     this._menuCategoryRepository = menuCategoryRepository;
+    this._menuItemsRepository = menuItemsRepository;
   }
 
-  async execute(payload: AddMenuCategoryUseCasePayload): Promise<CategoryId> {
-    const { ownerId, storeId } = payload;
-    await this._userRepository.verifyUserId(ownerId);
+  async execute(payload: IAddMenuCategory): Promise<CategoryId> {
+    const { userId, storeId } = payload;
+    await this._userRepository.verifyUserId(userId);
     await this._storeRepository.verifyStoreId(storeId);
 
     const categoryPayload = new AddMenuCategoryEntity(payload);
@@ -48,7 +49,7 @@ export default class AddMenuCategoryUseCase {
     await this._logRepository.log({
       task: "category created",
       storeId,
-      userId: ownerId,
+      userId,
       targetId: categoryId,
     });
 

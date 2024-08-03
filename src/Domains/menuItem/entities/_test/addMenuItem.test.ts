@@ -10,7 +10,7 @@ describe("addMenuItem entities", () => {
   });
   test("should throw error when supplied with invalid or missing payload properties", () => {
     const payload = {
-      ownerId: 123,
+      userId: 123,
       storeId: true,
       categoryId: ["invalid type"],
       name: {},

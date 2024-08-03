@@ -40,7 +40,7 @@ describe("Store Repository", () => {
     it("should persist new Store in database", async () => {
       const payload: IAddStore = {
         name: "Warung Pos",
-        ownerId: "user-123",
+        userId: "user-123",
       };
 
       const storeRepository = new StoreRepository(db, fakeIdGenerator);
@@ -58,7 +58,7 @@ describe("Store Repository", () => {
       const stubStoreRow: Partial<IStoreRow> = {
         id: "store-123",
         name: "Warung Pos",
-        ownerId: "user-123",
+        userId: "user-123",
       };
 
       await storeTableTestHelper.addStore(stubStoreRow);
@@ -99,7 +99,7 @@ describe("Store Repository", () => {
       const stubStore: Partial<IStoreRow> = {
         id: "store-123",
         name: "Warung Pos",
-        ownerId: "user-123",
+        userId: "user-123",
       };
 
       await storeTableTestHelper.addStore(stubStore);
@@ -112,7 +112,7 @@ describe("Store Repository", () => {
       const expectedResult: Partial<IStoreRow> = {
         id: "store-123",
         name: "Warung Pos",
-        ownerId: "user-123",
+        userId: "user-123",
       };
 
       // Action
@@ -121,7 +121,7 @@ describe("Store Repository", () => {
       // Assert
       expect(result.name).toEqual(expectedResult.name);
       expect(result.id).toEqual(expectedResult.id);
-      expect(result.ownerId).toEqual(expectedResult.ownerId);
+      expect(result.userId).toEqual(expectedResult.userId);
     });
   });
 
@@ -130,7 +130,7 @@ describe("Store Repository", () => {
       const stubStore: Partial<IStoreRow> = {
         id: "store-123",
         name: "Warung Pos",
-        ownerId: "user-123",
+        userId: "user-123",
         createdAt: new Date("2 Jan 2000").toISOString(),
         modifiedAt: new Date("2 Jan 2000").toISOString(),
       };
@@ -148,7 +148,7 @@ describe("Store Repository", () => {
       const expectedResult: Partial<IStoreRow> = {
         id: "store-123",
         name: "Warung Pos",
-        ownerId: "user-123",
+        userId: "user-123",
         createdAt: new Date("2 Jan 2000").toISOString(),
         modifiedAt: new Date("2 Jan 2000").toISOString(),
       };
@@ -160,7 +160,7 @@ describe("Store Repository", () => {
       expect(result[0].name).toEqual(expectedResult.name);
       //   expect(result[0]).toEqual(expectedResult);
       expect(result[0].id).toEqual(expectedResult.id);
-      expect(result[0].ownerId).toEqual(expectedResult.ownerId);
+      expect(result[0].userId).toEqual(expectedResult.userId);
       expect(new Date(result[0].createdAt).toISOString()).toEqual(
         expectedResult.createdAt
       );
