@@ -306,7 +306,7 @@ describe.sequential("Menu Category Repository", () => {
         sortOrder: 2,
       });
 
-      const updateSortOrderPayload: IUpdateMenuCategorySortOrder[] = [
+      const updateSortOrderPayload: IUpdateSortOrder[] = [
         { id: "cat-01", sortOrder: 2 },
         { id: "cat-02", sortOrder: 1 },
         { id: "cat-03", sortOrder: 0 },

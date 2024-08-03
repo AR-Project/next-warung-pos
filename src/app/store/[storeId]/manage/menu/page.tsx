@@ -4,9 +4,7 @@ import { BackButton } from "@/presentation/component/BackButton";
 import { DefaultButton } from "@/presentation/component/DefaultButton";
 import DeleteCategoryButton from "./DeleteCategoryButton";
 
-type CategoryProps = IMenuCategoryInfo & {
-  // TODO
-};
+type CategoryProps = IMenuCategoryRow;
 
 async function MenuCategory(props: CategoryProps) {
   return (
@@ -46,7 +44,7 @@ export default async function Page() {
         </div>
       )}
 
-      {/* TODO: Front-end display all categories with each menu */}
+      {/* FUTURE: Front-end display all categories with each menu */}
     </>
   );
 }

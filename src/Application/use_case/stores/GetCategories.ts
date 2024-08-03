@@ -30,7 +30,7 @@ export default class GetCategoriesUseCase {
     this._menuCategoryRepository = menuCategoryRepository;
   }
 
-  async execute(payload: StoreId): Promise<IMenuCategoryInfo[]> {
+  async execute(payload: StoreId): Promise<IMenuCategoryRow[]> {
     await this._storeRepository.verifyStoreId(payload);
 
     await this._logRepository.log({

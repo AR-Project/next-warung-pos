@@ -5,7 +5,7 @@ import container from "@/infrastructure/container";
 import getAppSession from "@/presentation/utils/getAppSession";
 
 type ActionReturns = {
-  data: IMenuCategoryInfo[] | null;
+  data: IMenuCategoryRow[] | null;
   error?: string;
 };
 

@@ -13,7 +13,7 @@ export const storeMenuCategoriesTableHelper = {
     createdAt = new Date("1 Jan 2000").toISOString(),
     modifiedAt = new Date("1 Jan 2000").toISOString(),
     isDeleted = false,
-  }: Partial<IMenuCategoryInfo>) => {
+  }: Partial<IMenuCategoryRow>) => {
     await db.insert(storeMenuCategories).values({
       id,
       userId,

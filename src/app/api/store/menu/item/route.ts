@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(forbidden, forbiddenCode);
   }
 
-  // TODO: Endpoint for adding menu item
+  // FUTURE: API addmenu item
   return NextResponse.json({
     message: "TODO",
   });

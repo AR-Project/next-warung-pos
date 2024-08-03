@@ -1,10 +1,23 @@
 export {};
 
 declare global {
+  /**
+   * MENU GLOBAL TYPES
+   */
+
+  type IUpdateSortOrder = {
+    id: string;
+    sortOrder: number;
+  };
+
+  /**
+   * CATEGORY TYPES
+   */
+
   type CategoryId = string;
 
   type IAddMenuCategory = {
-    ownerId: string; // TODO: Should be named `userId` for consistency
+    ownerId: string; // ISSUE: Should be named `userId` for consistency
     storeId: string;
     name: string;
     color?: string; // use inline style on UI
@@ -14,12 +27,7 @@ declare global {
     id: CategoryId;
   };
 
-  type IUpdateMenuCategorySortOrder = {
-    id: string;
-    sortOrder: number;
-  };
-
-  type IMenuCategoryInfo = {
+  type IMenuCategoryRow = {
     id: string;
     userId: string;
     storeId: string;
@@ -29,5 +37,43 @@ declare global {
     createdAt: string;
     modifiedAt: string;
     isDeleted: boolean;
+  };
+
+  type IMenuCategoryInfo = IMenuCategoryRow;
+
+  /**
+   * ITEM TYPES
+   */
+
+  type ItemId = string;
+
+  type IMenuItemRow = {
+    id: string;
+    userId: string;
+    storeId: string;
+    categoryId: string;
+    name: string;
+    imageUrl: string | null;
+    color: string;
+    price: number;
+    sortOrder: number;
+    isAvailable: boolean;
+    isDeleted: boolean;
+    createdAt: string;
+    modifiedAt: string;
+  };
+
+  type IAddMenuItemPayload = {
+    userId: string;
+    storeId: string;
+    categoryId: string;
+    name: string;
+    color: string;
+    price: number;
+    imageUrl?: string;
+  };
+
+  type IUpdateMenuItem = Partial<IAddMenuItemPayload> & {
+    id: ItemId;
   };
 }

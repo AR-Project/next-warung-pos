@@ -30,7 +30,12 @@ export default class MenuCategoryRepository
     const total = await this._db
       .select({ count: count() })
       .from(storeMenuCategories)
-      .where(eq(storeMenuCategories.storeId, storeId));
+      .where(
+        and(
+          eq(storeMenuCategories.storeId, storeId),
+          eq(storeMenuCategories.isDeleted, false)
+        )
+      );
 
     return total[0].count;
   }
@@ -102,7 +107,7 @@ export default class MenuCategoryRepository
   }
 
   async updateMenuCategory(payload: IUpdateMenuCategory) {
-    const finalPayload: Partial<IMenuCategoryInfo> = {
+    const finalPayload: Partial<IMenuCategoryRow> = {
       userId: payload.ownerId,
       storeId: payload.storeId,
       name: payload.name,
@@ -119,7 +124,7 @@ export default class MenuCategoryRepository
     return updatedCategory[0];
   }
 
-  async updateCategorySortOrder(payload: IUpdateMenuCategorySortOrder[]) {
+  async updateCategorySortOrder(payload: IUpdateSortOrder[]) {
     if (payload.length === 0) {
       throw new InvariantError("Update payload not valid");
     }
