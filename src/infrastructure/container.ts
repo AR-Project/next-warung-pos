@@ -9,6 +9,7 @@ import UserRepository from "./repository/UserRepository";
 import StoreRepository from "./repository/StoreRepository";
 import LogsRepository from "./repository/LogsRepository";
 import MenuCategoryRepository from "./repository/MenuCategoryRepository";
+import MenuItemRepository from "./repository/MenuItemRepository";
 
 // Utils Implementations
 container.register("db", { useValue: db });
@@ -23,5 +24,6 @@ container.register("IStoreRepository", { useClass: StoreRepository });
 container.register("IMenuCategoryRepository", {
   useClass: MenuCategoryRepository,
 });
+container.register("IMenuItemsRepository", { useClass: MenuItemRepository });
 
 export default container;

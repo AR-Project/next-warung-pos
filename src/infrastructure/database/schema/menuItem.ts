@@ -9,7 +9,6 @@ import { storeMenuCategories } from "./categories";
 import { user } from "./user";
 import { stores } from "./stores";
 
-// ISSUE: add price column
 export const storeMenuItem = pgTable("stores_menu_item", {
   id: text("id").primaryKey().unique(),
   userId: text("user_id")

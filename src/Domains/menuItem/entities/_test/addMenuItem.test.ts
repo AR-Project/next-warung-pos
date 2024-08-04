@@ -1,11 +1,10 @@
-// @ts-nocheck
-
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import AddMenuItem from "../addMenuItem";
 
 describe("addMenuItem entities", () => {
   test("should throw error when payload is not complete", async () => {
+    // @ts-expect-error Error Handling
     expect(() => new AddMenuItem()).toThrowError("ADD_MENU_ITEM.PAYLOAD_EMPTY");
   });
   test("should throw error when supplied with invalid or missing payload properties", () => {
@@ -17,17 +16,19 @@ describe("addMenuItem entities", () => {
       color: "test",
     };
 
+    // @ts-expect-error Error Handling
     expect(() => new AddMenuItem(payload)).toThrowError(
       "ADD_MENU_ITEM.INVALID_PAYLOAD"
     );
   });
 
   test("should not throw error when color properties is missing from payload", () => {
-    const payload: IAddStore = {
+    const payload: IAddMenuItemPayload = {
       userId: "user-123",
       storeId: "store-123",
       categoryId: "cat-123",
       name: "test",
+      price: 1000,
     };
 
     const addMenuItem = new AddMenuItem(payload);
@@ -41,12 +42,13 @@ describe("addMenuItem entities", () => {
   });
 
   test("should initialize object correctly", () => {
-    const payload: IAddStore = {
+    const payload: IAddMenuItemPayload = {
       userId: "user-123",
       storeId: "store-123",
       categoryId: "cat-123",
       name: "test",
       color: "#FFFFFF",
+      price: 1000,
     };
 
     const addMenuItem = new AddMenuItem(payload);

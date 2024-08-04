@@ -68,7 +68,7 @@ declare global {
     storeId: string;
     categoryId: string;
     name: string;
-    color: string;
+    color?: string;
     price: number;
     imageUrl?: string;
   };
