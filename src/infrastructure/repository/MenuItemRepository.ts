@@ -25,6 +25,7 @@ export default class MenuItemRepository implements IMenuItemsRepository {
     this._db = db;
     this._idGenerator = idGenerator;
   }
+
   async countByCategoryId(payload: string) {
     const totalCount = await this._db
       .select({ count: count() })
@@ -38,7 +39,7 @@ export default class MenuItemRepository implements IMenuItemsRepository {
     return totalCount[0].count;
   }
 
-  async add(payload: IAddMenuItemPayload) {
+  async add(payload: Required<IAddMenuItemPayload>) {
     const itemsCount = await this.countByCategoryId(payload.categoryId);
 
     const items = await this._db
@@ -78,6 +79,23 @@ export default class MenuItemRepository implements IMenuItemsRepository {
       .orderBy(storeMenuItem.sortOrder);
     return items;
   }
+
+  async getByCategoryIds(ids: CategoryId[]) {
+    const items = await this._db
+      .select()
+      .from(storeMenuItem)
+      .where(
+        and(
+          inArray(storeMenuItem.categoryId, ids),
+          eq(storeMenuItem.isDeleted, false)
+        )
+      )
+      .orderBy(storeMenuItem.sortOrder);
+    return items;
+
+    // Promise<IMenuItemRow[]>
+  }
+
   // updateSortOrder: (payload: IUpdateSortOrder[]) => Promise<void>;
   async updateSortOrder(payload: IUpdateSortOrder[]) {
     if (payload.length === 0) {

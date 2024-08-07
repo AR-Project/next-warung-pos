@@ -1,50 +1,29 @@
-import { getCategoriesAction } from "./action";
+import { getMenuAction } from "./action";
 
 import { BackButton } from "@/presentation/component/BackButton";
 import { DefaultButton } from "@/presentation/component/DefaultButton";
-import DeleteCategoryButton from "./DeleteCategoryButton";
-
-type CategoryProps = IMenuCategoryRow;
-
-async function MenuCategory(props: CategoryProps) {
-  return (
-    <div className="p-2 flex flex-row content-between justify-between">
-      <div className="flex flex-row gap-2">
-        <div
-          style={{ backgroundColor: props.color }}
-          className="h-auto w-1"
-        ></div>
-        {props.name}
-      </div>
-      <div className="flex flex-row">
-        🔼🔽
-        <DeleteCategoryButton categoryId={props.id} />
-      </div>
-    </div>
-  );
-}
+import MenuCategory from "./_component/MenuCategory";
 
 export default async function Page() {
-  const result = await getCategoriesAction();
+  const { data: menu } = await getMenuAction();
 
   return (
     <>
       <BackButton></BackButton>
       <h1>Manage Menu Page</h1>
       <div className="flex flex-row gap-3">
-        <DefaultButton href="./new-item" label="Add" />
+        <DefaultButton href="./new-item" label="Create Item" />
         <DefaultButton href="./new-category" label="New Category" />
+        <DefaultButton href="#TODO" label="Edit order" />
       </div>
 
-      {result.data !== undefined && (
+      {menu && (
         <div className="py-4">
-          {result.data?.map((category) => (
-            <MenuCategory {...category} key={category.id} />
+          {menu.map((category) => (
+            <MenuCategory category={category} key={category.id} />
           ))}
         </div>
       )}
-
-      {/* FUTURE: Front-end display all categories with each menu */}
     </>
   );
 }

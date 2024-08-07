@@ -1,30 +1,29 @@
 "use server";
 
-import GetCategoriesUseCase from "@/Application/use_case/stores/GetCategories";
 import container from "@/infrastructure/container";
+import GetMenuUseCase from "@/Application/use_case/stores/GetMenuUseCase";
 import getAppSession from "@/presentation/utils/getAppSession";
 
-type ActionReturns = {
-  data: IMenuCategoryRow[] | null;
-  error?: string;
-};
+type GetMenuActionRespond = Promise<
+  GetActionReturns<CategoryWithItemChildren[]>
+>;
 
-export async function getCategoriesAction(): Promise<ActionReturns> {
+export async function getMenuAction(): GetMenuActionRespond {
   const session = await getAppSession();
 
   if (!session) {
-    return { data: null, error: "Not loggedin" };
+    return { error: "Not loggedin" };
   }
 
   if (!session.user.activeStore) {
-    return { data: null, error: "Not selected any store" };
+    return { error: "Not selected any store" };
   }
 
-  const getCategoriesUseCase = container.resolve(GetCategoriesUseCase);
+  const getMenuUseCase = container.resolve(GetMenuUseCase);
   try {
-    const result = await getCategoriesUseCase.execute(session.user.activeStore);
-    return { data: result };
+    const menu = await getMenuUseCase.execute(session.user.activeStore);
+    return { data: menu };
   } catch (error: any) {
-    return { data: null, error: "internal error" };
+    return { error: "internal error" };
   }
 }

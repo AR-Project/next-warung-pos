@@ -7,12 +7,14 @@ type props = {
 
 export default async function Manage({ params }: props) {
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <BackButton />
-      <h1>Manage Store</h1>
-      <p>Active store: {params.storeId}</p>
+      <div className="flex flex-row gap-4 items-baseline">
+        <h1>Manage Store</h1>
+        <p className="text-xs text-gray-700">Current Store: {params.storeId}</p>
+      </div>
       <DefaultButton href="./menu" label="Manage Menu"></DefaultButton>
       {/* FUTURE: Frontend List store realtime information, e.g. total transaction, payment type, item sold */}
-    </>
+    </div>
   );
 }

@@ -41,6 +41,7 @@ export default class AddMenuItem implements IAddMenuItemEntities {
         name: z.string().min(3),
         color: z.string().length(7),
         price: z.number(),
+        imageUrl: z.string(),
       })
       .partial({
         color: true,

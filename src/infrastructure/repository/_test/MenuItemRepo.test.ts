@@ -10,8 +10,6 @@ import { storeMenuCategoriesTableHelper } from "../../../../test/_testHelper/Men
 
 import MenuItemRepository from "../MenuItemRepository";
 
-import NotFoundError from "@/Commons/exceptions/NotFoundError";
-import { storeMenuItem } from "@/infrastructure/database/schema/menuItem";
 import { storeMenuItemTableHelper } from "../../../../test/_testHelper/MenuItemTableHelper";
 
 describe.sequential("Menu Item Repository", () => {
@@ -160,13 +158,14 @@ describe.sequential("Menu Item Repository", () => {
   describe.sequential("add method on menuItem", async () => {
     test("should add single item correctly", async () => {
       const menuItemRepository = new MenuItemRepository(db, fakeIdGenerator);
-      const testMenuItemPayload: IAddMenuItemPayload = {
+      const testMenuItemPayload = {
         userId: "user-123",
         storeId: "store-123",
         categoryId: "cat-001",
         name: "Test Item #1",
         color: "#000000",
         price: 0,
+        imageUrl: "n/a",
       };
 
       const result = await menuItemRepository.add(testMenuItemPayload);
@@ -182,13 +181,14 @@ describe.sequential("Menu Item Repository", () => {
         preloadItems.map((item) => storeMenuItemTableHelper.add(item))
       );
 
-      const testMenuItemPayload: IAddMenuItemPayload = {
+      const testMenuItemPayload: Required<IAddMenuItemPayload> = {
         userId: "user-123",
         storeId: "store-123",
         categoryId: "cat-001",
         name: "Test Item #3",
         color: "#000000",
         price: 0,
+        imageUrl: "n/a",
       };
       const menuItemRepository = new MenuItemRepository(db, fakeIdGenerator);
 
@@ -212,6 +212,7 @@ describe.sequential("Menu Item Repository", () => {
         name: "Test #1",
         color: "#000000",
         price: 0,
+        imageUrl: "n/a",
       });
       const item = await storeMenuItemTableHelper.findById(result);
 
@@ -232,6 +233,7 @@ describe.sequential("Menu Item Repository", () => {
         name: "Test #1",
         color: "#000000",
         price: 0,
+        imageUrl: "n/a",
       });
 
       const itemFound = await menuItemRepository.getById("item-123");
@@ -259,6 +261,23 @@ describe.sequential("Menu Item Repository", () => {
       expect(resultA.length).toBe(3);
       expect(resultB.length).toBe(1);
       expect(resultC.length).toBe(0);
+    });
+  });
+
+  describe.sequential("getByCategoryIds", async () => {
+    test("should return items correctly", async () => {
+      const menuItemRepository = new MenuItemRepository(db, fakeIdGenerator);
+
+      await Promise.all(
+        preloadItems.map((item) => storeMenuItemTableHelper.add(item))
+      );
+
+      const items = await menuItemRepository.getByCategoryIds([
+        "cat-001",
+        "cat-002",
+      ]);
+
+      expect(items.length).toBe(4);
     });
   });
 

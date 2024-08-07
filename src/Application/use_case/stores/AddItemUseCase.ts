@@ -4,7 +4,6 @@ import type IUserRepository from "@/Domains/users/IUserRepository";
 import type ILogRepository from "@/Domains/logs/ILogRepository";
 import { type IMenuCategoriesRepository } from "@/Domains/menuCategory/IMenuCategoryRepository";
 import type IStoreRepository from "@/Domains/stores/IStoreRepository";
-import AddMenuCategoryEntity from "@/Domains/menuCategory/entities/addMenuCategory";
 import type { IMenuItemsRepository } from "@/Domains/menuItem/IMenuItemRepository";
 import AddMenuItem from "@/Domains/menuItem/entities/addMenuItem";
 

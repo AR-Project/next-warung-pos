@@ -34,4 +34,9 @@ declare global {
   type ActivityLogRepository = ActivityLog & {
     id: string;
   };
+
+  type GetActionReturns<T> = {
+    data?: T;
+    error?: string;
+  };
 }

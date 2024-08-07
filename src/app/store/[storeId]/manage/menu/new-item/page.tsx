@@ -1,11 +1,27 @@
 import { BackButton } from "@/presentation/component/BackButton";
+import { fetchAvailableCategory, addItem } from "./action";
+import SubmitButton from "./SubmitButton";
+import FormAddItem from "./FormAddItem";
+import { redirect } from "next/navigation";
+import getActiveStoreFromSession from "@/presentation/utils/getActiveStoreFromSession";
+import getAppSession from "@/presentation/utils/getAppSession";
+
+function FailToLoad() {
+  return (
+    <>
+      <h3>Fail to load</h3>
+    </>
+  );
+}
 
 export default async function Page() {
-  // FUTURE: Front end for add new item
+  const categories = await fetchAvailableCategory();
+
   return (
     <>
       <BackButton></BackButton>
-      <h1>New Item Page</h1>;
+      <h1>New Item Page</h1>
+      {categories ? <FormAddItem categories={categories} /> : <FailToLoad />}
     </>
   );
 }

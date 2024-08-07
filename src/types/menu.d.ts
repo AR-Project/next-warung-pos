@@ -76,4 +76,11 @@ declare global {
   type IUpdateMenuItem = Partial<IAddMenuItemPayload> & {
     id: ItemId;
   };
+
+  /**
+   * Category with it's items as children
+   */
+  type CategoryWithItemChildren = IMenuCategoryRow & {
+    children: IMenuCategoryRow[];
+  };
 }

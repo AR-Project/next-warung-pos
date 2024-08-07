@@ -1,5 +1,4 @@
-import { BackButton } from "@/presentation/component/BackButton";
-import getAppSession from "@/presentation/utils/getAppSession";
+import { SlEqualizer } from "react-icons/sl";
 import Link from "next/link";
 
 export default async function Page({
@@ -7,22 +6,17 @@ export default async function Page({
 }: {
   params: { storeId: string };
 }) {
-  const session = await getAppSession();
-
   return (
-    <>
-      <BackButton></BackButton>
-      <div>This is store page: {params.storeId}</div>
-      <div>Store id on session: {session?.user.activeStore}</div>
+    <div className="flex flex-col gap-2 p-2 mt-5">
       <p>
         <Link
-          className="border rounded-md text-md w-full bg-blue-400 p-1 border-blue-900/20 shadow-md"
+          className="flex flex-row gap-1 fborder rounded-sm text-md w-fit uppercase font-bold items-center bg-blue-600 py-2 px-5 border border-white shadow-sm"
           href={"./manage"}
         >
-          manage store
+          <SlEqualizer /> Manage Store
         </Link>
       </p>
       <p>TODO: Store Transaction Page, client side</p>
-    </>
+    </div>
   );
 }

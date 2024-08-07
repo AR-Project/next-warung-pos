@@ -3,5 +3,5 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="flex flex-col m-2 p-4">{children}</div>;
+  return <>{children}</>;
 }
