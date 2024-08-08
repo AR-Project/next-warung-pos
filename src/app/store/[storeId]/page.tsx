@@ -16,7 +16,10 @@ export default async function Page({
           <SlEqualizer /> Manage Store
         </Link>
       </p>
-      <p>TODO: Store Transaction Page, client side</p>
+      <p className="text-xs text-gray-500 italic">
+        TODO: Display store dynamic information: Total transaction, total gross,
+        item sold, etc
+      </p>
     </div>
   );
 }

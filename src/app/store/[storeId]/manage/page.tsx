@@ -14,7 +14,9 @@ export default async function Manage({ params }: props) {
         <p className="text-xs text-gray-700">Current Store: {params.storeId}</p>
       </div>
       <DefaultButton href="./menu" label="Manage Menu"></DefaultButton>
-      {/* FUTURE: Frontend List store realtime information, e.g. total transaction, payment type, item sold */}
+      <p className="text-sm text-gray-500 italic">
+        TODO: Update store information, export transaction, add employee
+      </p>
     </div>
   );
 }

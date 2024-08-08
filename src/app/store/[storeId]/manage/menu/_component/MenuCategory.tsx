@@ -26,7 +26,8 @@ export default async function MenuCategory({ category }: CategoryProps) {
         {items.length === 0 && (
           <p className="text-gray-400 text-sm italic">Empty</p>
         )}
-        {items.length > 0 && items.map((item) => <MenuItem item={item} />)}
+        {items.length > 0 &&
+          items.map((item) => <MenuItem item={item} key={item.id} />)}
       </div>
     </div>
   );
