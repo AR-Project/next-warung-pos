@@ -1,4 +1,5 @@
 import DeleteCategoryButton from "./DeleteCategoryButton";
+import MenuItem from "./MenuItem";
 
 type CategoryProps = {
   category: CategoryWithItemChildren;
@@ -22,8 +23,10 @@ export default async function MenuCategory({ category }: CategoryProps) {
         </div>
       </div>
       <div className="c-items-container pl-5">
-        {items.length > 0 && items.map((item) => <p>{item.name}</p>)}
-        {items.length === 0 && <p>##Add new item</p>}
+        {items.length === 0 && (
+          <p className="text-gray-400 text-sm italic">Empty</p>
+        )}
+        {items.length > 0 && items.map((item) => <MenuItem item={item} />)}
       </div>
     </div>
   );

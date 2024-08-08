@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z, ZodError } from "zod";
 
 type IAddMenuItemEntities = Required<IAddMenuItemPayload> &
   VerifyPayload<IAddMenuItemPayload>;
@@ -45,6 +45,7 @@ export default class AddMenuItem implements IAddMenuItemEntities {
       })
       .partial({
         color: true,
+        imageUrl: true,
       });
 
     try {

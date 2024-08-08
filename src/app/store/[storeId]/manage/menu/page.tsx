@@ -9,14 +9,14 @@ export default async function Page() {
 
   return (
     <>
-      <BackButton></BackButton>
+      <BackButton />
       <h1>Manage Menu Page</h1>
       <div className="flex flex-row gap-3">
         <DefaultButton href="./new-item" label="Create Item" />
         <DefaultButton href="./new-category" label="New Category" />
         <DefaultButton href="#TODO" label="Edit order" />
       </div>
-
+      {!menu && <p>Start By create new Category</p>}
       {menu && (
         <div className="py-4">
           {menu.map((category) => (

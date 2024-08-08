@@ -37,7 +37,6 @@ function DeleteCategoryButton(props: Props) {
       <div className="cursor-pointer" onClick={() => onClick()}>
         ❌
       </div>
-      <ToastContainer />
     </>
   );
 }

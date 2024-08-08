@@ -1,67 +1,46 @@
 "use client";
-import { useFormInputs } from "@/presentation/hooks/useFormInput";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+import { toast } from "react-toastify";
+
+import { createStore } from "./action";
+import FormSubmitButton from "@/presentation/component/Form/FormSubmitButton";
+import { BackButton } from "@/presentation/component/BackButton";
 
 export default function Page() {
-  const router = useRouter();
+  const [state, formAction] = useFormState<FormState, FormData>(
+    createStore,
+    {}
+  );
 
-  const [payload, handleChange] = useFormInputs(["name"]);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  async function onSubmitHandler(event: { preventDefault: () => void }) {
-    event.preventDefault();
-    setLoading(true);
-    const response = await fetch("/api/store", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const data = (await response.json()) as {
-      status: "success" | "fail";
-      data: { storeId: string };
-    };
-
-    if (response.status !== 201) {
-      toast.error("error");
-      setLoading(false);
+  useEffect(() => {
+    if (state.message) {
+      toast.success(state.message);
+      redirect("/profile");
     }
-    if (response.status === 201) {
-      toast.success("Store Created");
-      setTimeout(() => {
-        router.push("../");
-      }, 3000);
+    if (state.error) {
+      toast.error(state.error);
     }
-  }
+  }, [state]);
 
   return (
-    <>
+    <section>
+      <BackButton />
+      <h1>Create New Store</h1>
       <form
         className="flex flex-col gap-4 p-2 w-screen border-red-600 text-white"
-        onSubmit={onSubmitHandler}
+        action={formAction}
       >
         <input
           type="text"
           className="text-black text-lg"
           id="name"
           name="name"
-          onChange={handleChange}
-          value={payload.name}
           required
         />
-        <button
-          type="submit"
-          className={`${
-            loading && "cursor-not-allowed"
-          } border border-white rounded-md p-2 bg-slate-800 hover:bg-slate-600`}
-          disabled={loading}
-        >
-          Create Store
-        </button>
+        <FormSubmitButton>Create Store</FormSubmitButton>
       </form>
-      <ToastContainer position="bottom-left" theme="dark" autoClose={7000} />
-    </>
+    </section>
   );
 }

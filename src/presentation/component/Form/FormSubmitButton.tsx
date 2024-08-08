@@ -3,7 +3,7 @@
 import { PropsWithChildren, useState } from "react";
 import { useFormStatus } from "react-dom";
 
-function SubmitButton({ children }: PropsWithChildren) {
+function FormSubmitButton({ children }: PropsWithChildren) {
   const { pending } = useFormStatus();
 
   return (
@@ -17,4 +17,4 @@ function SubmitButton({ children }: PropsWithChildren) {
   );
 }
 
-export default SubmitButton;
+export default FormSubmitButton;

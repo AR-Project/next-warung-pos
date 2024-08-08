@@ -2,17 +2,12 @@
 
 import { useFormState } from "react-dom";
 import { addItem } from "./action";
-import SubmitButton from "./SubmitButton";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import FormSubmitButton from "@/presentation/component/Form/FormSubmitButton";
 
 type Props = {
   categories: IMenuCategoryRow[];
-};
-
-type FormState = {
-  message?: string;
-  error?: string;
 };
 
 export default function FormAddItem({ categories }: Props) {
@@ -31,14 +26,6 @@ export default function FormAddItem({ categories }: Props) {
     <>
       <form action={formAction} className="flex flex-col gap-1 ">
         <input type="hidden" name="image-url" value="TODO" />
-        <label htmlFor="add-item-name">Name: </label>
-        <input
-          className="text-black"
-          type="text"
-          name="name"
-          id="item-name"
-          required
-        />
         <label htmlFor="item-category">Choose category:</label>
         <select
           className="text-black"
@@ -56,6 +43,15 @@ export default function FormAddItem({ categories }: Props) {
             </option>
           ))}
         </select>
+        <label htmlFor="add-item-name">Name: </label>
+        <input
+          className="text-black"
+          type="text"
+          name="name"
+          id="item-name"
+          required
+        />
+
         <label htmlFor="item-price">Price: </label>
         <input
           type="number"
@@ -71,9 +67,8 @@ export default function FormAddItem({ categories }: Props) {
           defaultValue="#2563eb"
         />
 
-        <SubmitButton>Tambah Item</SubmitButton>
+        <FormSubmitButton>Tambah Item</FormSubmitButton>
       </form>
-      <ToastContainer />
     </>
   );
 }

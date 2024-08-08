@@ -81,6 +81,6 @@ declare global {
    * Category with it's items as children
    */
   type CategoryWithItemChildren = IMenuCategoryRow & {
-    children: IMenuCategoryRow[];
+    children: IMenuItemRow[];
   };
 }

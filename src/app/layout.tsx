@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import TopNav from "@/presentation/component/TopNav";
 import Provider from "@/presentation/context/UserProvider";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,11 @@ export default async function RootLayout({
         <body className={`${inter.className} flex flex-col h-screen w-screen`}>
           <TopNav />
           {children}
+          <ToastContainer
+            position="bottom-left"
+            theme="dark"
+            autoClose={7000}
+          />
         </body>
       </Provider>
     </html>

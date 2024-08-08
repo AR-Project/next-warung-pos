@@ -22,7 +22,7 @@ export default function SelectStore({ stores }: Props) {
   }
 
   return (
-    <div className="flex flex-col gap 5 m-4 pb-4">
+    <div className="flex flex-col gap 5 pb-4">
       <h1 className="text-xl pb-4 font-bold ">🛒 Select Store</h1>
       <ol className="flex flex-col gap-3">
         {stores.length === 0 && <div>You dont have any store</div>}

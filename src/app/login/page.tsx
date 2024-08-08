@@ -31,7 +31,6 @@ export default function Page() {
       <button onClick={() => toast.success("test")}>toast</button>
       <LoginInput onLoginHandler={onLoginHandler} />
       <a href="/register">register</a>
-      <ToastContainer position="bottom-left" theme="dark" autoClose={7000} />
     </section>
   );
 }

@@ -1,6 +1,6 @@
 import { BackButton } from "@/presentation/component/BackButton";
 import { fetchAvailableCategory, addItem } from "./action";
-import SubmitButton from "./SubmitButton";
+import FormSubmitButton from "../../../../../../presentation/component/Form/FormSubmitButton";
 import FormAddItem from "./FormAddItem";
 import { redirect } from "next/navigation";
 import getActiveStoreFromSession from "@/presentation/utils/getActiveStoreFromSession";

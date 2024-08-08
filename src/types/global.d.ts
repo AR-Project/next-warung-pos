@@ -39,4 +39,9 @@ declare global {
     data?: T;
     error?: string;
   };
+
+  type FormState = {
+    message?: string;
+    error?: string;
+  };
 }

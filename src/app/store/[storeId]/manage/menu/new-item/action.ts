@@ -52,7 +52,17 @@ export async function addItem(prevState: any, formData: FormData) {
     if (error instanceof Error) {
       return { error: error.message };
     }
-
     return { error: "Internal Server Error" };
   }
+}
+
+export async function deleteMenuItem(prevState: any, formData: FormData) {
+  const rawItemId = formData.get("item-id");
+  const itemId = isString(rawItemId) ? rawItemId : "";
+
+  return { message: `${itemId} deleted` };
+}
+
+function isString(data: FormDataEntryValue | null): data is string {
+  return data !== null && typeof data === "string";
 }
