@@ -1,4 +1,4 @@
-import getAppSession from "@/presentation/utils/getAppSession";
+import getAppSession from "@/Commons/session/getAppSession";
 
 export default async function ServerSide() {
   const session = await getAppSession();

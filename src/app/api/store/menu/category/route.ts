@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import container from "@/infrastructure/container";
 import { forbidden, forbiddenCode } from "@/app/api/_lib/message";
-import getAppSession from "@/presentation/utils/getAppSession";
+import getAppSession from "@/Commons/session/getAppSession";
 import AddMenuCategoryUseCase from "@/Application/use_case/stores/AddCategoryUseCase";
 import apiErrorResponse from "@/Commons/apiErrorResponse/apiErrorResponseFactory";
 import GetCategoriesUseCase from "@/Application/use_case/stores/GetCategories";

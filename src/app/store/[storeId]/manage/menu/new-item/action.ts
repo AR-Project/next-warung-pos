@@ -5,9 +5,9 @@ import container from "@/infrastructure/container";
 import AddMenuItemUseCase from "@/Application/use_case/stores/AddItemUseCase";
 import DeleteItemUseCase from "@/Application/use_case/stores/DeleteItemUseCase";
 import GetCategoriesUseCase from "@/Application/use_case/stores/GetCategories";
-import getActiveStoreFromSession from "@/presentation/utils/getActiveStoreFromSession";
-import getAppSession from "@/presentation/utils/getAppSession";
-import getCurrentUser from "@/presentation/utils/getCurrentUser";
+import getActiveStoreFromSession from "@/Commons/session/getActiveStoreFromSession";
+import getAppSession from "@/Commons/session/getAppSession";
+import getCurrentUser from "@/Commons/session/getCurrentUser";
 
 export async function fetchAvailableCategory() {
   const activeStore = await getActiveStoreFromSession();

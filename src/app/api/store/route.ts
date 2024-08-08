@@ -1,5 +1,5 @@
 import apiErrorResponse from "@/Commons/apiErrorResponse/apiErrorResponseFactory";
-import getAppSession from "@/presentation/utils/getAppSession";
+import getAppSession from "@/Commons/session/getAppSession";
 import { NextRequest, NextResponse } from "next/server";
 import container from "@/infrastructure/container";
 import AddStoreUseCase from "@/Application/use_case/stores/AddStoreUseCase";

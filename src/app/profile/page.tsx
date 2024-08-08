@@ -1,4 +1,4 @@
-import getAppSession from "@/presentation/utils/getAppSession";
+import getAppSession from "@/Commons/session/getAppSession";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getStoresByUserId } from "./action";

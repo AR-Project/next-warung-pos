@@ -1,5 +1,5 @@
 import { getStoreInfo } from "@/Commons/action/storeAction";
-import getAppSession from "@/presentation/utils/getAppSession";
+import getAppSession from "@/Commons/session/getAppSession";
 import { redirect } from "next/navigation";
 import StoreInfo from "./StoreInfo";
 

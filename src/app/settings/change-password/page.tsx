@@ -1,7 +1,7 @@
 import React from "react";
 
 import ChangePasswordInput from "@/presentation/component/input/ChangePasswordInput";
-import getAppSession from "@/presentation/utils/getAppSession";
+import getAppSession from "@/Commons/session/getAppSession";
 import useCase from "./action";
 
 export default async function ChangePassword() {

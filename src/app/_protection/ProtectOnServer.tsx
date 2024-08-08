@@ -1,4 +1,4 @@
-import getAppSession from "@/presentation/utils/getAppSession";
+import getAppSession from "@/Commons/session/getAppSession";
 import { redirect } from "next/navigation";
 
 type props = {

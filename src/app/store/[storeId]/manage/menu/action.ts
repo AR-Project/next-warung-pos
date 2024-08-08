@@ -2,7 +2,7 @@
 
 import container from "@/infrastructure/container";
 import GetMenuUseCase from "@/Application/use_case/stores/GetMenuUseCase";
-import getAppSession from "@/presentation/utils/getAppSession";
+import getAppSession from "@/Commons/session/getAppSession";
 
 type GetMenuActionRespond = Promise<
   GetActionReturns<CategoryWithItemChildren[]>
