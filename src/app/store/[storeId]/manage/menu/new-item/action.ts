@@ -1,11 +1,13 @@
 "use server";
+import { revalidatePath } from "next/cache";
 
-import AddMenuItemUseCase from "@/Application/use_case/stores/AddItemUseCase";
-import GetCategoriesUseCase from "@/Application/use_case/stores/GetCategories";
 import container from "@/infrastructure/container";
+import AddMenuItemUseCase from "@/Application/use_case/stores/AddItemUseCase";
+import DeleteItemUseCase from "@/Application/use_case/stores/DeleteItemUseCase";
+import GetCategoriesUseCase from "@/Application/use_case/stores/GetCategories";
 import getActiveStoreFromSession from "@/presentation/utils/getActiveStoreFromSession";
 import getAppSession from "@/presentation/utils/getAppSession";
-import { revalidatePath } from "next/cache";
+import getCurrentUser from "@/presentation/utils/getCurrentUser";
 
 export async function fetchAvailableCategory() {
   const activeStore = await getActiveStoreFromSession();
@@ -60,9 +62,27 @@ export async function deleteMenuItem(prevState: any, formData: FormData) {
   const rawItemId = formData.get("item-id");
   const itemId = isString(rawItemId) ? rawItemId : "";
 
-  return { message: `${itemId} deleted` };
+  const deleteMenuItemUseCase = container.resolve(DeleteItemUseCase);
+  try {
+    const user = await getCurrentUser();
+    await deleteMenuItemUseCase.execute({
+      userId: user.id,
+      itemId: itemId,
+    });
+    revalidatePath("/");
+    return { message: `${itemId} deleted` };
+  } catch (error) {
+    return actionErrorHandler(error);
+  }
 }
 
 function isString(data: FormDataEntryValue | null): data is string {
   return data !== null && typeof data === "string";
+}
+
+function actionErrorHandler(error: any) {
+  if (error instanceof Error) {
+    return { error: error.message };
+  }
+  return { error: "Server Error " };
 }
