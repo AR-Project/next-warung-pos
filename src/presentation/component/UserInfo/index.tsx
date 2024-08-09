@@ -1,28 +1,21 @@
 "use client";
-import { SyncLoader } from "react-spinners";
 import { HiMenu } from "react-icons/hi";
 
 import LogoutButton from "../LogoutButton";
 import { Menu, Transition } from "@headlessui/react";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { Session } from "next-auth";
 
-export default function UserInfo() {
-  const { data: session, status, update } = useSession();
+type Props = {
+  session: Session;
+};
 
-  if (!session) {
-    if (status === "loading") {
-      return <SyncLoader color="white" size={7} />;
-    }
-    return <a href="/login">Login</a>;
-  }
-
+export default function UserInfo({ session }: Props) {
   return (
     <Menu className="relative" as="div">
       <div className="flex flex-row gap-2">
-        {session.user.username}
-        <Menu.Button className="flex flex-row  items-center justify-center border border-white bg-blue-300/40 p-1 rounded-md gap-5">
-          <HiMenu></HiMenu>
+        <Menu.Button className="flex flex-row items-center justify-center bg-blue-100 bg-transparent rounded-sm gap-5">
+          <HiMenu className="text-xl"></HiMenu>
         </Menu.Button>
       </div>
       <Transition
