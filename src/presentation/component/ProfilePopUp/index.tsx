@@ -1,10 +1,10 @@
 "use client";
+import Link from "next/link";
+import { type Session } from "next-auth";
 import { HiMenu } from "react-icons/hi";
+import { Menu, Transition } from "@headlessui/react";
 
 import LogoutButton from "../LogoutButton";
-import { Menu, Transition } from "@headlessui/react";
-import Link from "next/link";
-import { Session } from "next-auth";
 
 type Props = {
   session: Session;
@@ -36,9 +36,9 @@ export default function UserInfo({ session }: Props) {
           </Menu.Item>
           <Menu.Item>
             {({ close }) => (
-              <a href="/settings/change-password" onClick={close}>
+              <Link href="/settings/change-password" onClick={close}>
                 Ganti Password
-              </a>
+              </Link>
             )}
           </Menu.Item>
           <Menu.Item>

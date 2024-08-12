@@ -1,8 +1,8 @@
 import { SlBasketLoaded } from "react-icons/sl";
-
-import UserInfo from "../UserInfo";
-import getAppSession from "@/Commons/session/getAppSession";
 import Link from "next/link";
+
+import ProfilePopUp from "../ProfilePopUp";
+import getAppSession from "@/Commons/session/getAppSession";
 
 export default async function TopNav() {
   const session = await getAppSession();
@@ -14,7 +14,11 @@ export default async function TopNav() {
           <SlBasketLoaded /> Warung Pos
         </h1>
       </Link>
-      {session ? <UserInfo session={session} /> : <a href="/login">Login</a>}
+      {session ? (
+        <ProfilePopUp session={session} />
+      ) : (
+        <Link href="/login">Login</Link>
+      )}
     </section>
   );
 }
